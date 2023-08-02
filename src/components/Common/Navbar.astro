@@ -1,0 +1,133 @@
+---
+import { WebsiteConfig } from "../../config";
+
+const { DEVFEST_NAME, DEVFEST_LOGO } = WebsiteConfig;
+---
+
+<style>
+  .menu-icon {
+    transform: scale(-1.5, 1.5);
+    position: relative;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+  }
+
+  .menu-icon .menu-icon__cheeckbox {
+    display: block;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    z-index: 2;
+    -webkit-touch-callout: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+    opacity: 0;
+  }
+
+  .menu-icon div {
+    margin: auto;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    width: 22px;
+    height: 12px;
+  }
+
+  .menu-icon span {
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 2px;
+    border-radius: 1px;
+    background: rgba(0, 0, 0, 0.9);
+    transition: all 0.2s cubic-bezier(0.1, 0.82, 0.76, 0.965);
+  }
+
+  .menu-icon span:first-of-type {
+    top: 0;
+  }
+
+  .menu-icon span:last-of-type {
+    bottom: 1px;
+  }
+
+  .menu-icon.active span:first-of-type,
+  .menu-icon .menu-icon__cheeckbox:checked + div span:first-of-type {
+    transform: rotate(45deg);
+    top: 5px;
+  }
+
+  .menu-icon.active span:last-of-type,
+  .menu-icon .menu-icon__cheeckbox:checked + div span:last-of-type {
+    transform: rotate(-45deg);
+    bottom: 5px;
+  }
+
+  .menu-icon.active:hover span:first-of-type,
+  .menu-icon.active:hover span:last-of-type,
+  .menu-icon:hover .menu-icon__cheeckbox:checked + div span:first-of-type,
+  .menu-icon:hover .menu-icon__cheeckbox:checked + div span:last-of-type {
+    width: 22px;
+  }
+</style>
+<header>
+  <nav
+    class="flex flex-row justify-between items-center p-4 top-0 left-0 right-0 bg-white fixed z-30"
+  >
+    <a href="/">
+      <img src={DEVFEST_LOGO} alt={DEVFEST_NAME} class="max-h-12" />
+    </a>
+
+    <div
+      class="nav-links top-[-32rem] duration-500 md:static absolute bg-white md:min-h-fit min-h-[30vh] left-0 md:w-auto w-full flex items-center md:p-0 p-5"
+    >
+      <div
+        class="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-8 items-stretch"
+      >
+        <a class="hover:text-gray-500" href="/schedule">Schedule</a>
+        <a class="hover:text-gray-500" href="/speakers">Speakers</a>
+        <a class="hover:text-gray-500" href="/location">Location</a>
+        <a class="hover:text-gray-500" href="/faq">Faq</a>
+        <a class="hover:text-gray-500" href="/team">Team</a>
+        <a
+          class="py-2 px-4 rounded-r-sm bg-amber-500 hover:bg-amber-600 text-white ease-in duration-100"
+          href="https://gdg.community.dev/gdg-bari/">GET A TICKET</a
+        >
+      </div>
+    </div>
+
+    <div class="flex items-center gap-6 md:hidden">
+      <div
+        class="menu-icon navbar-toggler"
+        role="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#main-menu"
+        aria-controls="main-menu"
+        aria-expanded="true"
+        aria-label="Toggle navigation"
+      >
+        <input class="menu-icon__cheeckbox" type="checkbox" />
+        <div>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<script>
+  const navList = document.querySelector(".nav-links");
+  const toggler = document.querySelector(".navbar-toggler");
+
+  toggler?.addEventListener("click", toggleMenu);
+
+  function toggleMenu(e) {
+    e.name = e.name === "open" ? "close" : "open";
+    navList?.classList.toggle("top-[4rem]");
+  }
+</script>
