@@ -1,8 +1,9 @@
 ---
-import { CollectionEntry } from "astro:content";
+import { Collectionspeaker } from "astro:content";
+import SpeakersLinks from "./SpeakersLinks.astro";
 
 interface Props {
-  speaker: CollectionEntry<"speakers">;
+  speaker: Collectionspeaker<"speakers">;
 }
 
 const { speaker } = Astro.props;
@@ -12,8 +13,11 @@ const imgUrl = `/assets/images/speakers/${speaker.data.image}`;
 const words = speaker.body.split(" ");
 let body = words.slice(0, 20).join(" ");
 
-if(words.length > 15) {
-    body += "...";
+const { twitter, instagram, facebook, websites, linkedin, github } =
+  speaker.data;
+
+if (words.length > 15) {
+  body += "...";
 }
 ---
 
@@ -23,7 +27,16 @@ if(words.length > 15) {
 >
   <img src={imgUrl} alt={speaker.data.name} class="w-32 h-32 rounded-full" />
   <p class="my-2 font-semibold">{speaker.data.name}</p>
-  <p class="mb-4 ">{speaker.data.tagline}</p>
+  <p class="mb-4">{speaker.data.tagline}</p>
 
-  <p class="text-sm">{body}</p>
-</div>
+  <p class="text-sm mb-2">{body}</p>
+
+  <SpeakersLinks
+  linkedin={speaker.data.linkedin}
+  twitter={speaker.data.twitter}
+  github={speaker.data.github}
+  websites={speaker.data.websites}
+  facebook={speaker.data.facebook}
+  instagram={speaker.data.instagram}
+/>
+</a>

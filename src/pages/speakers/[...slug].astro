@@ -3,6 +3,7 @@ import { CollectionEntry, getCollection } from "astro:content";
 import Footer from "../../components/Common/Footer.astro";
 import Navbar from "../../components/Common/Navbar.astro";
 import PageHead from "../../components/Common/PageHead.astro";
+import SpeakersLinks from "../../components/Speakers/SpeakersLinks.astro";
 // 1. Generate a new path for every collection entry
 
 interface Props {
@@ -32,7 +33,7 @@ const { Content } = await entry.render();
 
     <main
       id="swup"
-      class="main-content transition-fade flex flex-col max-w-6xl m-auto px-4 flex-1"
+      class="main-content transition-fade flex flex-col max-w-6xl m-auto px-4 pb-12 flex-1"
       data-swup="0"
     >
       <div class="flex flex-col justify-center h-32 mt-32">
@@ -40,7 +41,36 @@ const { Content } = await entry.render();
       </div>
 
       <div class="flex flex-col">
-        <h2 class="text-4xl mb-3">{entry.data.name}</h2>
+        <div class="flex md:flex-row flex-col items-center mb-10">
+          <div class="flex-none w-40 mb-2">
+            <img
+              src={`/assets/images/speakers/${entry.data.image}`}
+              alt={entry.data.name}
+              class="rounded-full"
+            />
+          </div>
+          <div class="flex-1 pl-6 flex flex-col md:items-start items-center">
+            <h2 class="text-4xl mb-1">{entry.data.name}</h2>
+            <p class="text-lg mb-3">{entry.data.tagline}</p>
+
+            {
+              entry.data.community != null && (
+                <div class="py-1 px-2 rounded-sm bg-green-600 text-white">
+                  {entry.data.community}
+                </div>
+              )
+            }
+            <div class="py-2"></div>
+            <SpeakersLinks
+              linkedin={entry.data.linkedin}
+              twitter={entry.data.twitter}
+              github={entry.data.github}
+              websites={entry.data.websites}
+              facebook={entry.data.facebook}
+              instagram={entry.data.instagram}
+            />
+          </div>
+        </div>
         <Content />
       </div>
     </main>

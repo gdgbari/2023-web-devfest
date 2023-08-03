@@ -1,0 +1,60 @@
+---
+interface Props {
+  twitter?: string;
+  instagram?: string;
+  facebook?: string;
+  websites?: string[];
+  linkedin?: string;
+  github?: string;
+}
+
+const { twitter, instagram, facebook, websites, linkedin, github } =
+  Astro.props;
+---
+
+
+<div class="flex flex-row items-center">
+  {
+    linkedin && (
+      <div class="mr-3 cursor-pointer" role="button" onclick={`window.location.href = '${linkedin}'`}>
+        <img class="w-6" src="/assets/vectors/linkedin-in-brands.svg" />
+      </div>
+    )
+  }
+  {
+    github && (
+      <div class="mr-3 cursor-pointer" role="button" onclick={`window.location.href = '${github}'`}>
+        <img class="w-6" src="/assets/vectors/github-in-brands.svg" />
+      </div>
+    )
+  }
+  {
+    facebook && (
+      <div class="mr-3 cursor-pointer" role="button" onclick={`window.location.href = '${facebook}'`}>
+        <img class="w-6" src="/assets/vectors/facebook.svg" />
+      </div>
+    )
+  }
+  {
+    instagram && (
+      <div class="mr-3 cursor-pointer" role="button"  onclick={`window.location.href = '${instagram}'`}>
+        <img class="w-6" src="/assets/vectors/instagram-brands.svg" />
+      </div>
+    )
+  }
+  {
+    twitter && (
+      <div class="mr-3 cursor-pointer" role="button" onclick={`window.location.href = '${twitter}'`}>
+        <img class="w-6" src="/assets/vectors/linkedin-in-brands.svg" />
+      </div>
+    )
+  }
+  {
+    websites &&
+      websites.map((website) => (
+        <div class="mr-3 cursor-pointer" role="button" onclick={`window.location.href = '${website}'`}>
+          <img class="w-6" src="/assets/vectors/web.svg" />
+        </div>
+      ))
+  }
+</div>
