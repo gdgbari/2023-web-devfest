@@ -3,6 +3,7 @@ import { CollectionEntry, getCollection } from "astro:content";
 import Footer from "../../components/Common/Footer.astro";
 import Navbar from "../../components/Common/Navbar.astro";
 import PageHead from "../../components/Common/PageHead.astro";
+import PageTitle from "../../components/Common/PageTitle.astro";
 import SpeakersLinks from "../../components/Speakers/SpeakersLinks.astro";
 // 1. Generate a new path for every collection entry
 
@@ -36,9 +37,7 @@ const { Content } = await entry.render();
       class="main-content transition-fade flex flex-col max-w-6xl m-auto px-4 pb-12 flex-1"
       data-swup="0"
     >
-      <div class="flex flex-col justify-center h-32 mt-32">
-        <h1 class="text-6xl mb-10 font-bold">Speakers</h1>
-      </div>
+      <PageTitle title="Speaker"/>
 
       <div class="flex flex-col">
         <div class="flex md:flex-row flex-col items-center mb-10">

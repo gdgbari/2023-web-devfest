@@ -235,6 +235,29 @@ declare module 'astro:content' {
   data: InferEntrySchema<"externals">
 } & { render(): Render[".md"] };
 };
+"sessions": {
+"deep_dive_flutter.md": {
+	id: "deep_dive_flutter.md";
+  slug: "deep_dive_flutter";
+  body: string;
+  collection: "sessions";
+  data: InferEntrySchema<"sessions">
+} & { render(): Render[".md"] };
+"flutter_1.md": {
+	id: "flutter_1.md";
+  slug: "flutter_1";
+  body: string;
+  collection: "sessions";
+  data: InferEntrySchema<"sessions">
+} & { render(): Render[".md"] };
+"flutter_2.md": {
+	id: "flutter_2.md";
+  slug: "flutter_2";
+  body: string;
+  collection: "sessions";
+  data: InferEntrySchema<"sessions">
+} & { render(): Render[".md"] };
+};
 "speakers": {
 "anna.md": {
 	id: "anna.md";

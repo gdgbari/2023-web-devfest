@@ -1,4 +1,4 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection, reference, z } from 'astro:content';
 
 const speakersCollection = defineCollection({
     type: 'content', // v2.5.0 and later
@@ -15,6 +15,7 @@ const speakersCollection = defineCollection({
         websites: z.array(z.string()).optional(),
         linkedin: z.string().optional(),
         github: z.string().optional(),
+        sessions: z.array(reference('sessions')).optional(),
     }),
 });
 
@@ -23,15 +24,31 @@ const externalsCollection = defineCollection({
     type: 'content', // v2.5.0 and later
     schema: z.object({
         name: z.string(),
-        type: z.enum(['sponsor_main','sponsor_platinum','sponsor_gold','sponsor_silver', 'partner',]),
+        type: z.enum(['sponsor_main', 'sponsor_platinum', 'sponsor_gold', 'sponsor_silver', 'partner',]),
         url: z.string(),
         image: z.string(),
     }),
 });
 
+const sessionsCollections = defineCollection({
+    type: 'content',
+    schema: z.object({
+        title: z.string(),
+        dateStart: z.date(),
+        dateEnd: z.date(),
+        location: z.string(),
+        level: z.string(),
+        tags: z.array(z.string()),
+        speaker: reference('speakers'),
+    })
+});
+
+
 
 // 3. Export a single `collections` object to register your collection(s)
 export const collections = {
+    'sessions': sessionsCollections,
     'speakers': speakersCollection,
     'externals': externalsCollection,
 };
+
