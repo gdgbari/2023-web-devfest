@@ -8,10 +8,10 @@ import PageTitle from "./PageTitle.astro";
 
 interface Props {
   pageTitle: string;
+  navbarTrasparent?: boolean;
 }
 
-const {pageTitle} = Astro.props;
-
+const { pageTitle, navbarTrasparent } = Astro.props;
 ---
 
 <!-- Below is your "component template." It's just HTML, but with
@@ -20,20 +20,18 @@ const {pageTitle} = Astro.props;
   <PageHead />
 
   <body class="flex-1 flex flex-col">
-    <Navbar />
+    <Navbar transparentMode={navbarTrasparent} />
 
     <main
       id="swup"
       class="main-content transition-fade flex flex-col max-w-6xl m-auto px-4 pb-12 flex-1"
       data-swup="0"
     >
-      <PageTitle title={pageTitle}/>
-    
-      <slot />
-    
-    </main>
-    
-    <Footer />
+      <PageTitle title={pageTitle} />
 
+      <slot />
+    </main>
+
+    <Footer />
   </body>
 </html>

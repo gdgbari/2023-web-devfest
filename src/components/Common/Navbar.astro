@@ -2,6 +2,14 @@
 import { WebsiteConfig } from "../../config";
 
 const { DEVFEST_NAME, DEVFEST_LOGO } = WebsiteConfig;
+
+interface Props {
+  transparentMode?: boolean;
+}
+
+const { transparentMode = false } = Astro.props;
+
+const initialClasses = transparentMode ? "bg-trasparent" : "bg-white shadow-md";
 ---
 
 <style>
@@ -76,7 +84,9 @@ const { DEVFEST_NAME, DEVFEST_LOGO } = WebsiteConfig;
 </style>
 <header>
   <nav
-    class="flex flex-row justify-between items-center p-4 top-0 left-0 right-0 bg-white fixed z-30 shadow-md"
+    class={`${
+      transparentMode ? "transparent-mode" : ""
+    } flex flex-row justify-between items-center p-4 top-0 left-0 right-0 fixed z-30 ${initialClasses} ease-in duration-150`}
   >
     <a href="/">
       <img src={DEVFEST_LOGO} alt={DEVFEST_NAME} class="max-h-12" />
@@ -125,26 +135,36 @@ const { DEVFEST_NAME, DEVFEST_LOGO } = WebsiteConfig;
   const navList = document.querySelector(".nav-links");
   const toggler = document.querySelector(".navbar-toggler");
   const nav = document.querySelector("nav");
-
+  const w = window as any;
   toggler?.addEventListener("click", toggleMenu);
 
   function toggleMenu(e) {
     e.name = e.name === "open" ? "close" : "open";
     navList?.classList.toggle("top-[4rem]");
-
   }
 
-  window.addEventListener("scroll", checkNav);
+  w.intitializeNav = () => {
+    window.addEventListener("scroll", checkNav);
+    checkNav();
+  };
+
+  w.navSetWhiteBg = () => {
+    nav?.classList.remove("bg-trasparent");
+    nav?.classList.add("bg-white");
+    nav?.classList.add("shadow-md");
+  };
 
   function checkNav() {
     if (window.scrollY > 100) {
-      nav?.classList.remove("bg-trasparent");
-      nav?.classList.add("bg-white");
-      nav?.classList.add("shadow-md");
+      w.navSetWhiteBg();
     } else {
       nav?.classList.add("bg-trasparent");
       nav?.classList.remove("bg-white");
       nav?.classList.remove("shadow-md");
     }
+  }
+
+  if (nav?.classList.contains("transparent-mode")) {
+    w.intitializeNav();
   }
 </script>
