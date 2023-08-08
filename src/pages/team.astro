@@ -1,28 +1,9 @@
 ---
 // Welcome to Astro! Everything between these triple-dash code fences
 
-import Navbar from "../components/Common/Navbar.astro";
-import PageHead from "../components/Common/PageHead.astro";
-import PageTitle from "../components/Common/PageTitle.astro";
-
-// is your "component frontmatter". It never runs in the browser.
-console.log("This runs in your terminal, not the browser!");
+import BaseLayout from "../components/Common/BaseLayout.astro";
 ---
 
-<!-- Below is your "component template." It's just HTML, but with
-     some magic sprinkled in to help you build great templates. -->
-<html lang="it" class="scroll-smooth">
-  <PageHead />
-
-  <body class="flex flex-col">
-    <Navbar />
-
-    <main
-      id="swup"
-      class="main-content transition-fade flex flex-col max-w-6xl m-auto px-4 pb-12 flex-1"
-      data-swup="0"
-    >
-      <PageTitle title="Team" />
-    </main>
-  </body>
-</html>
+<BaseLayout pageTitle="Schedule">
+  <div></div>
+</BaseLayout>

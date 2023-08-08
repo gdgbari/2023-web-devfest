@@ -1,0 +1,39 @@
+---
+// Welcome to Astro! Everything between these triple-dash code fences
+
+import Footer from "./Footer.astro";
+import Navbar from "./Navbar.astro";
+import PageHead from "./PageHead.astro";
+import PageTitle from "./PageTitle.astro";
+
+interface Props {
+  pageTitle: string;
+}
+
+const {pageTitle} = Astro.props;
+
+---
+
+<!-- Below is your "component template." It's just HTML, but with
+     some magic sprinkled in to help you build great templates. -->
+<html lang="it" class="scroll-smooth flex flex-col min-h-screen">
+  <PageHead />
+
+  <body class="flex-1 flex flex-col">
+    <Navbar />
+
+    <main
+      id="swup"
+      class="main-content transition-fade flex flex-col max-w-6xl m-auto px-4 pb-12 flex-1"
+      data-swup="0"
+    >
+      <PageTitle title={pageTitle}/>
+    
+      <slot />
+    
+    </main>
+    
+    <Footer />
+
+  </body>
+</html>

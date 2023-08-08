@@ -76,14 +76,14 @@ const { DEVFEST_NAME, DEVFEST_LOGO } = WebsiteConfig;
 </style>
 <header>
   <nav
-    class="flex flex-row justify-between items-center p-4 top-0 left-0 right-0 bg-white fixed z-30"
+    class="flex flex-row justify-between items-center p-4 top-0 left-0 right-0 bg-white fixed z-30 shadow-md"
   >
     <a href="/">
       <img src={DEVFEST_LOGO} alt={DEVFEST_NAME} class="max-h-12" />
     </a>
 
     <div
-      class="nav-links top-[-32rem] duration-500 md:static absolute bg-white md:min-h-fit min-h-[30vh] left-0 md:w-auto w-full flex items-center md:p-0 p-5"
+      class="nav-links top-[-32rem] duration-500 md:static absolute md:bg-transparent bg-white md:min-h-fit min-h-[30vh] left-0 md:w-auto w-full flex items-center md:p-0 p-5"
     >
       <div
         class="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-8 items-stretch"
@@ -124,11 +124,27 @@ const { DEVFEST_NAME, DEVFEST_LOGO } = WebsiteConfig;
 <script>
   const navList = document.querySelector(".nav-links");
   const toggler = document.querySelector(".navbar-toggler");
+  const nav = document.querySelector("nav");
 
   toggler?.addEventListener("click", toggleMenu);
 
   function toggleMenu(e) {
     e.name = e.name === "open" ? "close" : "open";
     navList?.classList.toggle("top-[4rem]");
+
+  }
+
+  window.addEventListener("scroll", checkNav);
+
+  function checkNav() {
+    if (window.scrollY > 100) {
+      nav?.classList.remove("bg-trasparent");
+      nav?.classList.add("bg-white");
+      nav?.classList.add("shadow-md");
+    } else {
+      nav?.classList.add("bg-trasparent");
+      nav?.classList.remove("bg-white");
+      nav?.classList.remove("shadow-md");
+    }
   }
 </script>
