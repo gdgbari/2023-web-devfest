@@ -1,6 +1,7 @@
 ---
 // Welcome to Astro! Everything between these triple-dash code fences
 
+import Footer from "../components/Common/Footer.astro";
 import Navbar from "../components/Common/Navbar.astro";
 import PageHead from "../components/Common/PageHead.astro";
 
@@ -23,6 +24,9 @@ console.log("This runs in your terminal, not the browser!");
     >
       <Navbar />
       <h1 class="font-bold text-3xl text-center">Ops!</h1>
+      <div class="my-5"></div>
+      <a class="py-2 px-4 rounded-r-sm bg-amber-500 hover:bg-amber-600 text-white ease-in duration-100" href="/"> Return to home</a>
     </main>
+    <Footer />
   </body>
 </html>

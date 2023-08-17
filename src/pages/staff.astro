@@ -1,0 +1,49 @@
+---
+// Welcome to Astro! Everything between these triple-dash code fences
+import { getCollection } from "astro:content";
+
+import BaseLayout from "../components/Common/BaseLayout.astro";
+import StaffMemberCard from "../components/Staff/StaffMemberCard.astro";
+
+const staffCollection = await getCollection("staff");
+
+const organizers = staffCollection.filter(
+  (staff) => staff.data.role === "organizer"
+);
+const collaborators = staffCollection.filter(
+  (staff) => staff.data.role === "collaborator"
+);
+---
+
+<BaseLayout pageTitle="Staff">
+  <div class="mb-6">
+    <p class="mb-3">
+      Google is known all around the world. Everyone is 'googling', checking on
+      'Maps' and communicating in 'Gmail'. For simple users, they are services
+      that just works, but not for us. Developers see much more: APIs,
+      scalability issues, complex technology stacks. And that is what GDG is
+      about.
+    </p>
+    <p>
+      <a class="text-amber-500" href="https://gdg.community.dev/gdg-bari/"
+        >Google Developers Group (GDG) Bari
+      </a>- is open and volunteer geek community who create exciting projects
+      and share experience about Google technologies with a passion.
+    </p>
+  </div>
+
+  <div class="my-3">
+    <h2 class="text-4xl font-semibold mb-10">Organizers</h2>
+
+    <div class="grid lg:grid-cols-3 md:grid-cols-2 gap-4">
+      {collaborators.map((staff) => <StaffMemberCard value={staff} />)}
+    </div>
+  </div>
+
+  <div class="my-3">
+    <h2 class="text-4xl font-semibold mb-10">Collaborators</h2>
+    <div class="grid lg:grid-cols-3 md:grid-cols-2 gap-4">
+      {collaborators.map((staff) => <StaffMemberCard value={staff} />)}
+    </div>
+  </div>
+</BaseLayout>

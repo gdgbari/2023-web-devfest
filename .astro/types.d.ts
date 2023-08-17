@@ -295,6 +295,36 @@ declare module 'astro:content' {
   data: InferEntrySchema<"speakers">
 } & { render(): Render[".md"] };
 };
+"staff": {
+"armando.md": {
+	id: "armando.md";
+  slug: "armando";
+  body: string;
+  collection: "staff";
+  data: InferEntrySchema<"staff">
+} & { render(): Render[".md"] };
+"giacomo.md": {
+	id: "giacomo.md";
+  slug: "giacomo";
+  body: string;
+  collection: "staff";
+  data: InferEntrySchema<"staff">
+} & { render(): Render[".md"] };
+"giancarlo.md": {
+	id: "giancarlo.md";
+  slug: "giancarlo";
+  body: string;
+  collection: "staff";
+  data: InferEntrySchema<"staff">
+} & { render(): Render[".md"] };
+"simone_bonfrate.md": {
+	id: "simone_bonfrate.md";
+  slug: "simone_bonfrate";
+  body: string;
+  collection: "staff";
+  data: InferEntrySchema<"staff">
+} & { render(): Render[".md"] };
+};
 
 	};
 

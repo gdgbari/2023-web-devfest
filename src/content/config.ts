@@ -44,11 +44,28 @@ const sessionsCollections = defineCollection({
 });
 
 
+const staffCollection = defineCollection({
+    type: 'content', // v2.5.0 and later
+    schema: z.object({
+        name: z.string(),
+        tagline: z.string(),
+        role: z.enum(['organizer', 'collaborator']),
+        image: z.string(),
+        twitter: z.string().optional(),
+        instagram: z.string().optional(),
+        facebook: z.string().optional(),
+        websites: z.array(z.string()).optional(),
+        linkedin: z.string().optional(),
+        github: z.string().optional(),
+    }),
+});
+
 
 // 3. Export a single `collections` object to register your collection(s)
 export const collections = {
     'sessions': sessionsCollections,
     'speakers': speakersCollection,
     'externals': externalsCollection,
+    'staff': staffCollection,
 };
 

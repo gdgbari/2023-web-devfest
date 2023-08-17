@@ -1,10 +1,13 @@
 ---
+import ReloadPrompt from "./ReloadPrompt.astro";
+
 const year = new Date().getFullYear();
 ---
 
 <div class="flex-none flex-row justify-start p-4 bg-zinc-800 text-white">
-    <span>Copyright {year}</span>
+  <span>Copyright {year}</span>
 </div>
 
-<script src="/src/pwa.ts"></script>
+<ReloadPrompt />
+
 <script src="/src/scripts/swup.ts"></script>

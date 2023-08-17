@@ -24,7 +24,7 @@ speakersEntries.forEach((s) => (speakerDict[s!.slug] = s!.data));
       sessions.map((s) => (
         <a
           href={`/sessions/${s.slug}`}
-          class="p-3 hover:shadow-lg shadow-md duration-150 ease-in flex flex-col"
+          class="p-3 hover:shadow-lg shadow-md duration-150 ease-in flex flex-col h-64"
         >
           <p class="text-xl font-semibold mb-3">{s.data.title}</p>
           <div class="flex flex-wrap gap-2">
@@ -38,7 +38,7 @@ speakersEntries.forEach((s) => (speakerDict[s!.slug] = s!.data));
               </div>
             ))}
           </div>
-          <div class="my-3 mx-4 border border-t-0 border-gray-400/50" />
+          <div class="mb-3 mt-auto mx-4 border border-t-0 border-gray-400/50" />
           <div class="flex flex-row">
             <div class="flex-none w-10 pr-3">
               <img

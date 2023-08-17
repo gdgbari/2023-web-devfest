@@ -1,28 +1,35 @@
 ---
-
+import { pwaInfo } from 'virtual:pwa-info';
 import { WebsiteConfig } from "../../config";
 
-const {DEVFEST_NAME} = WebsiteConfig;
+const { DEVFEST_NAME } = WebsiteConfig;
 
 interface Props {
-    description?: string;
-    keywords?: string;
-    author?: string;
+  description?: string;
+  keywords?: string;
+  author?: string;
 }
 
 const {
-    description = "Sviluppatore mobile e XR",
-    keywords = "mobile, app, ar, vr, hololens, flutter",
-    author = "Simone Bonfrate",
+  description = "Sviluppatore mobile e XR",
+  keywords = "mobile, app, ar, vr, hololens, flutter",
+  author = "Simone Bonfrate",
 } = Astro.props;
 ---
 
 <title>{DEVFEST_NAME}</title>
 
-<link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+<link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="description" content={description} />
 <meta name="keywords" content={keywords} />
 <meta name="author" content={author} />
 <link rel="stylesheet" href="/styles/swup.css" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="/pwa-192x192.png" />
+<link rel="mask-icon" href="/favicon.svg" color="#FFFFFF" />
+<meta name="msapplication-TileColor" content="#FFFFFF" />
+<meta name="theme-color" content="#ffffff" />
+<meta name="description" content={DEVFEST_NAME} />
+{ pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} /> }

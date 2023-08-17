@@ -1,0 +1,32 @@
+---
+import { CollectionEntry } from "astro:content";
+import SpeakersLinks from "../Speakers/SpeakersLinks.astro";
+interface Props {
+  value: CollectionEntry<"staff">;
+}
+
+const { value } = Astro.props;
+---
+
+<div class="flex flex-row">
+  <div class="flex-none w-32 pr-3">
+    <img
+      class="rounded-full"
+      src={`/assets/images/speakers/${value.data.image}`}
+      alt={value.data.name}
+    />
+  </div>
+  <div class="flex-1">
+    <p class="font-medium text-2xl">{value.data.name}</p>
+    <p>{value.data.tagline}</p>
+    <div class="my-2"></div>
+    <SpeakersLinks
+      linkedin={value.data.linkedin}
+      twitter={value.data.twitter}
+      github={value.data.github}
+      websites={value.data.websites}
+      facebook={value.data.facebook}
+      instagram={value.data.instagram}
+    />
+  </div>
+</div>

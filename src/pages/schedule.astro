@@ -1,7 +1,101 @@
 ---
 import BaseLayout from "../components/Common/BaseLayout.astro";
+import ScheduleCard from "../components/Schedule/ScheduleCard.astro";
+import ScheduleSessionCard from "../components/Schedule/ScheduleSessionCard.astro";
+import { ScheduleItem } from "../models/ScheduleItem";
+
+const registrationScheduleItem: ScheduleItem = {
+  showOnAllTracks: true,
+  title: "Registration",
+  start: new Date("2021-10-01T08:00:00-04:00"),
+  end: new Date("2021-10-01T09:00:00-04:00"),
+};
+
+const openingScheduleItem: ScheduleItem = {
+  showOnAllTracks: true,
+  title: "Registration",
+  start: new Date("2021-10-01T08:00:00-04:00"),
+  end: new Date("2021-10-01T09:00:00-04:00"),
+};
+
+const launchScheduleItem: ScheduleItem = {
+  showOnAllTracks: true,
+  title: "Registration",
+  start: new Date("2021-10-01T08:00:00-04:00"),
+  end: new Date("2021-10-01T09:00:00-04:00"),
+};
+
+const coffeBreakScheduleItem: ScheduleItem = {
+  showOnAllTracks: true,
+  title: "Registration",
+  start: new Date("2021-10-01T08:00:00-04:00"),
+  end: new Date("2021-10-01T09:00:00-04:00"),
+};
+
+const closingScheduleItem: ScheduleItem = {
+  showOnAllTracks: true,
+  title: "Registration",
+  start: new Date("2021-10-01T08:00:00-04:00"),
+  end: new Date("2021-10-01T09:00:00-04:00"),
+};
 ---
 
 <BaseLayout pageTitle="Schedule">
-  <div></div>
+  <div class="grid grid-flow-row md:grid-cols-4 gap-4">
+    <div class="col-span-4">
+      <ScheduleCard value={registrationScheduleItem} />
+    </div>
+    <div class="col-span-4">
+      <ScheduleCard value={openingScheduleItem} />
+    </div>
+    <div class="col-span-1">
+      <ScheduleSessionCard />
+    </div>
+    <div class="col-span-1">
+      <ScheduleSessionCard />
+    </div>
+    <div class="col-span-1">
+      <ScheduleSessionCard />
+    </div>
+    <div class="col-span-1">
+      <ScheduleSessionCard />
+    </div>
+    <div class="col-span-4">
+      <ScheduleCard value={launchScheduleItem} />
+    </div>
+
+    <div class="col-span-1">
+      <ScheduleSessionCard />
+    </div>
+    <div class="col-span-1">
+      <ScheduleSessionCard />
+    </div>
+    <div class="col-span-1">
+      <ScheduleSessionCard />
+    </div>
+    <div class="col-span-1">
+      <ScheduleSessionCard />
+    </div>
+
+    <div class="col-span-4">
+      <ScheduleCard value={coffeBreakScheduleItem} />
+    </div>
+
+    <div class="col-span-1">
+      <ScheduleSessionCard />
+    </div>
+    <div class="col-span-1">
+      <ScheduleSessionCard />
+    </div>
+    <div class="col-span-1">
+      <ScheduleSessionCard />
+    </div>
+    <div class="col-span-1">
+      <ScheduleSessionCard />
+    </div>
+
+    <div class="col-span-4">
+      <ScheduleCard value={closingScheduleItem} />
+    </div>
+  </div>
 </BaseLayout>
