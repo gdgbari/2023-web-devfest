@@ -1,13 +1,131 @@
 ---
+import { WebsiteConfig } from "../../config";
 import ReloadPrompt from "./ReloadPrompt.astro";
 
 const year = new Date().getFullYear();
 ---
 
-<div class="flex-none flex-row justify-start p-4 bg-zinc-800 text-white">
-  <span>Copyright {year}</span>
+<div class="p-4 bg-gray-300 text-gray-700">
+  <div class="max-w-6xl md:w-4/5 w-full m-auto flex flex-col gap-4">
+    <div class="flex md:flex-row flex-col md:gap-24 gap-4 justify-between">
+      <div class="flex gap-4 items-center">
+        <span class="text-lg font-medium">Share</span>
+        <button class="share" share-type="Facebook">FB</button>
+        <button class="share" share-type="Telegram">TL</button>
+        <button class="share" share-type="Twitter">TW</button>
+      </div>
+      <div class="flex gap-4 items-center">
+        <span class="text-lg font-medium">Follow Us</span>
+        {
+          WebsiteConfig.FACEBOOK_PAGE.length > 0 && (
+            <a
+              href={WebsiteConfig.FACEBOOK_PAGE}
+              target="_blank"
+              rel="noopener"
+            >
+              FB
+            </a>
+          )
+        }
+
+        {
+          WebsiteConfig.INSTAGRAM_PAGE.length > 0 && (
+            <a
+              href={WebsiteConfig.INSTAGRAM_PAGE}
+              target="_blank"
+              rel="noopener"
+            >
+              FB
+            </a>
+          )
+        }
+
+        {
+          WebsiteConfig.MEETUP_PAGE.length > 0 && (
+            <a href={WebsiteConfig.MEETUP_PAGE} target="_blank" rel="noopener">
+              FB
+            </a>
+          )
+        }
+        
+        {
+          WebsiteConfig.LINKEDIN_PAGE.length > 0 && (
+            <a href={WebsiteConfig.MEETUP_PAGE} target="_blank" rel="noopener">
+              FB
+            </a>
+          )
+        }
+
+        {
+          WebsiteConfig.WEBSITE.length > 0 && (
+            <a href={WebsiteConfig.WEBSITE} target="_blank" rel="noopener">
+              FB
+            </a>
+          )
+        }
+      </div>
+    </div>
+    <div class="border border-gray-700/50"></div>
+
+<div class="flex justify-between">
+  <div class="flex flex-col gap-1">
+    <p class="mb-2 text-lg font-medium">About</p>
+    <a href="https://developers.google.com/groups/">GDG</a>
+    <a href="https://devfest.withgoogle.com/">Devfest</a>
+    <a href="https://developersonair.withgoogle.com/code-of-conduct">Code of Conduct</a>
+  </div>
+  <div class="flex flex-col gap-1">
+    <p class="mb-2 text-lg font-medium">About</p>
+    <a href="https://developers.google.com/groups/">GDG</a>
+    <a href="https://devfest.withgoogle.com/">Devfest</a>
+    <a href="https://developersonair.withgoogle.com/code-of-conduct">Code of Conduct</a>
+  </div>
+</div>
+
+    <div class="border border-gray-700/50"></div>
+    
+    <div class="flex justify-between">
+      <span>GDG Bari</span>
+      <span>Copyright {year}</span>
+    </div>
+  </div>
 </div>
 
 <ReloadPrompt />
 
 <script src="/src/scripts/swup.ts"></script>
+<script>
+  import { WebsiteConfig } from "../../config";
+
+  document
+    .querySelectorAll("button.share")
+    .forEach((btn) => btn.addEventListener("click", shareWebsite));
+
+  function shareWebsite(e: Event) {
+    e.preventDefault();
+    const element = e.target as HTMLElement;
+    const attr = element.getAttribute("share-type");
+
+    const websiteUrl = encodeURIComponent(window.location.origin);
+    const fullTweet = WebsiteConfig.TWITTER_SOCIAL_TEXT.replace(
+      "{url}",
+      websiteUrl
+    );
+
+    switch (attr) {
+      case "Facebook":
+        window.open(
+          `https://www.facebook.com/sharer/sharer.php?u=${websiteUrl}`
+        );
+        break;
+      case "Twitter":
+        window.open(`https://twitter.com/intent/tweet?text=${fullTweet}`);
+        break;
+      case "Telegram":
+        window.open(
+          `https://t.me/share/url?url=${websiteUrl}&text=${WebsiteConfig.TELEGRAM_MESSAGE_TEXT}`
+        );
+        break;
+    }
+  }
+</script>
