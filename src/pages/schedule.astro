@@ -13,39 +13,39 @@ const registrationScheduleItem: ScheduleItem = {
 
 const openingScheduleItem: ScheduleItem = {
   showOnAllTracks: true,
-  title: "Registration",
+  title: "Opening",
   start: new Date("2021-10-01T08:00:00-04:00"),
   end: new Date("2021-10-01T09:00:00-04:00"),
 };
 
 const launchScheduleItem: ScheduleItem = {
   showOnAllTracks: true,
-  title: "Registration",
+  title: "Launch",
   start: new Date("2021-10-01T08:00:00-04:00"),
   end: new Date("2021-10-01T09:00:00-04:00"),
 };
 
 const coffeBreakScheduleItem: ScheduleItem = {
   showOnAllTracks: true,
-  title: "Registration",
+  title: "Certo! Certo! E' coffe break signori!",
   start: new Date("2021-10-01T08:00:00-04:00"),
   end: new Date("2021-10-01T09:00:00-04:00"),
 };
 
 const closingScheduleItem: ScheduleItem = {
   showOnAllTracks: true,
-  title: "Registration",
+  title: "Closing",
   start: new Date("2021-10-01T08:00:00-04:00"),
   end: new Date("2021-10-01T09:00:00-04:00"),
 };
 ---
 
 <BaseLayout pageTitle="Schedule">
-  <div class="grid grid-flow-row md:grid-cols-4 gap-4">
-    <div class="col-span-4">
+  <div class="grid grid-flow-row lg:grid-cols-4 grid-cols-1 gap-4">
+    <div class="lg:col-span-4">
       <ScheduleCard value={registrationScheduleItem} />
     </div>
-    <div class="col-span-4">
+    <div class="lg:col-span-4">
       <ScheduleCard value={openingScheduleItem} />
     </div>
     <div class="col-span-1">
@@ -57,10 +57,10 @@ const closingScheduleItem: ScheduleItem = {
     <div class="col-span-1">
       <ScheduleSessionCard />
     </div>
-    <div class="col-span-1">
+    <div class="lg:col-span-1">
       <ScheduleSessionCard />
     </div>
-    <div class="col-span-4">
+    <div class="lg:col-span-4">
       <ScheduleCard value={launchScheduleItem} />
     </div>
 
@@ -77,7 +77,7 @@ const closingScheduleItem: ScheduleItem = {
       <ScheduleSessionCard />
     </div>
 
-    <div class="col-span-4">
+    <div class="lg:col-span-4">
       <ScheduleCard value={coffeBreakScheduleItem} />
     </div>
 
@@ -94,7 +94,7 @@ const closingScheduleItem: ScheduleItem = {
       <ScheduleSessionCard />
     </div>
 
-    <div class="col-span-4">
+    <div class="lg:col-span-4">
       <ScheduleCard value={closingScheduleItem} />
     </div>
   </div>
