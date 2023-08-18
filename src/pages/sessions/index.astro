@@ -26,7 +26,7 @@ speakersEntries.forEach((s) => (speakerDict[s!.slug] = s!.data));
           href={`/sessions/${s.slug}`}
           class="p-3 hover:shadow-lg shadow-md duration-150 ease-in flex flex-col h-64"
         >
-          <p class="text-xl font-semibold mb-3">{s.data.title}</p>
+          <p class="text-xl font-medium mb-3">{s.data.title}</p>
           <div class="flex flex-wrap gap-2">
             <div class="py-1 px-2  rounded-md bg-green-600 text-white">
               <span class="text-sm">{s.data.level}</span>
