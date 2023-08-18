@@ -1,0 +1,58 @@
+@font-face {
+  font-family: "GoogleSans";
+  src: url("/assets/fonts/GoogleSans-Bold-v1.27.ttf") format("ttf");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GoogleSans";
+  src: url("/assets/fonts/GoogleSans-Bold-v1.27.ttf") format("ttf");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GoogleSans";
+  src: url("/assets/fonts/GoogleSans-BoldItalic-v1.27.ttf") format("ttf");
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+/* Register your custom font family and tell the browser where to find it. */
+@font-face {
+  font-family: "GoogleSans";
+  src: url("/assets/fonts/GoogleSans-Medium-v1.27.ttf") format("ttf");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GoogleSans";
+  src: url("/assets/fonts/GoogleSans-MediumItalic-v1.27.ttf") format("ttf");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "GoogleSans";
+  src: url("/assets/fonts/GoogleSans-Regular-v1.27.ttf") format("ttf");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GoogleSans";
+  src: url("/assets/fonts/GoogleSans-Italic-v1.27.ttf") format("ttf");
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
+* {
+  font-family: "GoogleSans", sans-serif;
+}
