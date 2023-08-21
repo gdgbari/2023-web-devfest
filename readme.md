@@ -15,3 +15,9 @@ npm install
 ```
 npm run dev
 ```
+
+## Build produciton version
+
+```
+npm run buid
+```
