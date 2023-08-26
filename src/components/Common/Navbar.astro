@@ -78,51 +78,53 @@ const links = [
       transparentMode ? "transparent-mode" : ""
     } flex flex-row justify-between items-center p-4 top-0 left-0 right-0 fixed z-30 ${initialClasses} ease-in duration-150`}
   >
-    <div class="flex gap-4">
-      <div class="flex items-center gap-6 md:hidden">
-        <div
-          class="menu-icon navbar-toggler"
-          role="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#main-menu"
-          aria-controls="main-menu"
-          aria-expanded="true"
-          aria-label="Toggle navigation"
-        >
-          <input class="menu-icon__cheeckbox" type="checkbox" />
-          <div>
-            <span></span>
-            <span></span>
+    <div class=" flex justify-between max-w-6xl lg:w-4/5 w-full m-auto">
+      <div class="flex gap-4">
+        <div class="flex items-center gap-6 md:hidden">
+          <div
+            class="menu-icon navbar-toggler"
+            role="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#main-menu"
+            aria-controls="main-menu"
+            aria-expanded="true"
+            aria-label="Toggle navigation"
+          >
+            <input class="menu-icon__cheeckbox" type="checkbox" />
+            <div>
+              <span></span>
+              <span></span>
+            </div>
           </div>
         </div>
+        <a href="/">
+          <img
+            src={DEVFEST_LOGO_DARK}
+            alt={DEVFEST_NAME}
+            class="nav-logo max-h-12"
+          />
+        </a>
       </div>
-      <a href="/">
-        <img
-          src={DEVFEST_LOGO_DARK}
-          alt={DEVFEST_NAME}
-          class="nav-logo max-h-12"
-        />
-      </a>
-    </div>
 
-    <div
-      class="nav-links top-[-32rem] md:static md:bg-transparent bg-white md:min-h-fit md:w-auto md:flex hidden items-center md:p-0 p-5"
-    >
       <div
-        id="navMenuLinks"
-        class="flex md:flex-row flex-col md:items-center lg:gap-[4vw] gap-[0.85rem] items-stretch"
+        class="nav-links top-[-32rem] md:static md:bg-transparent bg-white md:min-h-fit md:w-auto md:flex hidden items-center md:p-0 p-5"
       >
-        {
-          links.map((l) => (
-            <a class="hover:text-gray-500" class="p-3" href={l.link}>
-              {l.name}
-            </a>
-          ))
-        }
-        <a
-          class="py-2 px-4 rounded-r-sm bg-amber-500 hover:bg-amber-600 text-white ease-in duration-100"
-          href="https://gdg.community.dev/gdg-bari/">GET A TICKET</a
+        <div
+          id="navMenuLinks"
+          class="flex md:flex-row flex-col md:items-center lg:gap-4 gap-[0.85rem] items-stretch"
         >
+          {
+            links.map((l) => (
+              <a class="hover:text-gray-500" class="p-3" href={l.link}>
+                {l.name}
+              </a>
+            ))
+          }
+          <a
+            class="py-2 px-4 rounded-r-sm bg-amber-500 hover:bg-amber-600 text-white ease-in duration-100"
+            href="https://gdg.community.dev/gdg-bari/">GET A TICKET</a
+          >
+        </div>
       </div>
     </div>
 

@@ -2,21 +2,25 @@
 import InfoElement from "./InfoElement.astro";
 ---
 
-<div class="flex md:flex-row flex-col px-6 py-8 bg-amber-400 text-white">
-  <div class="flex-1 md:w-64 flex flex-col justify-center">
-    <p class="text-5xl font-bold mb-4">What is Devfest Bari?</p>
-    <p class="text-lg">
-      The DevFest, or ‘Developers Festival’, is a technical conference for
-      developers. It is aimed at students, professionals or simply curious
-      technophiles.
-    </p>
-  </div>
-  <div class="flex-1 md:w-32 md:pl-32 md:mt-0 mt-5 flex flex-col justify-center">
-    <div class="grid grid-rows-2 grid-flow-col gap-4">
-      <InfoElement value="100" label="test" />
-      <InfoElement value="100" label="test" />
-      <InfoElement value="100" label="test" />
-      <InfoElement value="100" label="test" />
+<div class="flex md:flex-row flex-col py-8 bg-amber-400 text-white">
+  <div class="flex max-w-6xl lg:w-4/5 w-full m-auto px-4">
+    <div class="flex-1 md:w-64 flex flex-col justify-center">
+      <p class="text-5xl font-bold mb-4">What is Devfest Bari?</p>
+      <p class="text-lg">
+        The DevFest, or ‘Developers Festival’, is a technical conference for
+        developers. It is aimed at students, professionals or simply curious
+        technophiles.
+      </p>
+    </div>
+    <div
+      class="flex-1 md:w-32 lg:pl-32 md:pl-10 md:mt-0 mt-5 flex flex-col justify-center"
+    >
+      <div class="grid grid-rows-2 grid-flow-col gap-4">
+        <InfoElement value="100" label="test" />
+        <InfoElement value="100" label="test" />
+        <InfoElement value="100" label="test" />
+        <InfoElement value="100" label="test" />
+      </div>
     </div>
   </div>
 </div>
