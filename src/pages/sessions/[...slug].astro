@@ -1,6 +1,7 @@
 ---
 import { CollectionEntry, getCollection, getEntry } from "astro:content";
 import BaseLayout from "../../components/Common/BaseLayout.astro";
+import { generateSessionCalendarEvent } from "../../scripts/calendar_helper";
 // 1. Generate a new path for every collection entry
 
 interface Props {
@@ -35,10 +36,36 @@ const end = entry.data.dateEnd.toLocaleTimeString("en-US", {
 });
 
 var speaker = await getEntry(entry.data.speaker);
+
+function formatDate(date: Date) {
+  const year = date.getUTCFullYear();
+  const month = date.getUTCMonth() + 1;
+  const day = date.getUTCDate();
+  const hours = date.getUTCHours();
+  const minutes = date.getUTCMinutes();
+
+  return `${year}${month}${day > 9 ? day : "0" + day}T${
+    hours > 9 ? hours : "0" + hours
+  }${minutes > 9 ? minutes : "0" + minutes}00Z`;
+}
 ---
 
 <BaseLayout pageTitle="Sessions">
-  <h2 class="text-4xl mb-3">{entry.data.title}</h2>
+  <div class="flex md:flex-row flex-col justify-between md:items-center items-start  gap-2 mb-6 cursor-pointer">
+    <h2 class="text-4xl mb-3">{entry.data.title}</h2>
+    <div
+      class="add-to-calendar m-y py-2 px-4 rounded-r-sm hover:bg-amber-400/20 border border-amber-600 text-amber-600 ease-in duration-100 text-center"
+      time-start={formatDate(entry.data.dateStart)}
+      time-end={formatDate(entry.data.dateEnd)}
+      session-details={encodeURIComponent(
+        `Speaker: ${speaker.data.name} \nTopics: ${entry.data.tags.join(" ")}`
+      )}
+      session-title={entry.data.title}
+      session-location={entry.data.location}
+    >
+      Aggiungi al calendario
+    </div>
+  </div>
   <div class="flex flex-wrap gap-2 mb-6">
     <div class="py-1 px-2 rounded-md bg-green-600 text-white">
       <span class="text-sm">{entry.data.level}</span>
@@ -78,3 +105,21 @@ var speaker = await getEntry(entry.data.speaker);
     </a>
   </div>
 </BaseLayout>
+
+<script>
+  const pageUrl = window.location.href;
+
+  const addToCalendar = document.querySelector(".add-to-calendar");
+  addToCalendar?.addEventListener("click", () => {
+    const timeStart = addToCalendar.getAttribute("time-start");
+    const timeEnd = addToCalendar.getAttribute("time-end");
+    const details =
+      addToCalendar.getAttribute("session-details") + `%0APage: ${pageUrl}`;
+    const location = addToCalendar.getAttribute("session-location");
+    const title = addToCalendar.getAttribute("session-title");
+
+    const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&dates=${timeStart}Z%2F${timeEnd}Z&details=${details}&location=${location}&text=${title}%201`;
+
+    return open(url, "_blank");
+  });
+</script>
