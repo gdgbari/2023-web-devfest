@@ -1,9 +1,9 @@
 ---
-import { Collectionspeaker } from "astro:content";
+import { CollectionEntry } from "astro:content";
 import SpeakersLinks from "./SpeakersLinks.astro";
 
 interface Props {
-  speaker: Collectionspeaker<"speakers">;
+  speaker: CollectionEntry<"speakers">;
 }
 
 const { speaker } = Astro.props;
@@ -32,11 +32,11 @@ if (words.length > 15) {
   <p class="text-sm mb-2">{body}</p>
 
   <SpeakersLinks
-  linkedin={speaker.data.linkedin}
-  twitter={speaker.data.twitter}
-  github={speaker.data.github}
-  websites={speaker.data.websites}
-  facebook={speaker.data.facebook}
-  instagram={speaker.data.instagram}
-/>
+    linkedin={linkedin}
+    twitter={twitter}
+    github={github}
+    websites={websites}
+    facebook={facebook}
+    instagram={instagram}
+  />
 </a>

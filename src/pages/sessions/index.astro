@@ -2,6 +2,7 @@
 import { getCollection, getEntry } from "astro:content";
 
 import BaseLayout from "../../components/Common/BaseLayout.astro";
+import SessionCard from "../../components/Sessions/SessionCard.astro";
 
 // is your "component frontmatter". It never runs in the browser.
 console.log("This runs in your terminal, not the browser!");
@@ -15,45 +16,14 @@ const speakersEntries = await Promise.all(
 );
 
 const speakerDict = {};
-speakersEntries.forEach((s) => (speakerDict[s!.slug] = s!.data));
+speakersEntries.forEach((s) => (speakerDict[s!.slug] = s!));
 ---
 
 <BaseLayout pageTitle="Sessions">
   <div class="grid lg:grid-cols-3 md:grid-cols-2 grid-flow-row gap-4 mt-5 mb-7">
     {
       sessions.map((s) => (
-        <a
-          href={`/sessions/${s.slug}`}
-          class="p-3 hover:shadow-lg shadow-md duration-150 ease-in flex flex-col h-64"
-        >
-          <p class="text-xl font-medium mb-3">{s.data.title}</p>
-          <div class="flex flex-wrap gap-2">
-            <div class="py-1 px-2  rounded-md bg-green-600 text-white">
-              <span class="text-sm">{s.data.level}</span>
-            </div>
-
-            {s.data.tags.map((t) => (
-              <div class="py-1 px-2 rounded-md bg-gray-200 text-gray-800">
-                <span class="text-sm">{t}</span>
-              </div>
-            ))}
-          </div>
-          <div class="mb-3 mt-auto mx-4 border border-t-0 border-gray-400/50" />
-          <div class="flex flex-row">
-            <div class="flex-none w-10 pr-3">
-              <img
-                class="rounded-full "
-                src={`/assets/images/speakers/${
-                  speakerDict[s.data.speaker.slug].image
-                }`}
-                alt={speakerDict[s.data.speaker.slug].name}
-              />
-            </div>
-            <div class="flex-1">
-              <p class="text-md">{speakerDict[s.data.speaker.slug].name}</p>
-            </div>
-          </div>
-        </a>
+       <SessionCard session={s} speaker={speakerDict[s.data.speaker.slug]} />
       ))
     }
   </div>

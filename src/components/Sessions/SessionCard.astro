@@ -1,0 +1,66 @@
+---
+import { CollectionEntry } from "astro:content";
+
+interface Props {
+  session: CollectionEntry<"sessions">;
+  speaker: CollectionEntry<"speakers">;
+}
+//speaker.data
+
+const { session, speaker } = Astro.props;
+
+const duration =
+  session.data.dateEnd.getTime() - session.data.dateStart.getTime();
+const durationMinutes = duration / 60000;
+---
+
+<a
+  href={`/sessions/${session.slug}`}
+  class="p-3 hover:shadow-lg shadow-md duration-150 ease-in flex flex-col h-64"
+>
+  <div class="flex justify-between gap-4">
+    <p class="text-xl font-medium mb-3">{session.data.title}</p>
+  </div>
+  <div class="flex flex-wrap gap-2">
+    <div class="py-1 px-2 rounded-md bg-green-600 text-white">
+      <span class="text-sm">{session.data.level}</span>
+    </div>
+
+    {
+      session.data.tags.map((t) => (
+        <div class="py-1 px-2 rounded-md bg-gray-200 text-gray-800">
+          <span class="text-sm">{t}</span>
+        </div>
+      ))
+    }
+  </div>
+  <div class="flex mt-auto">
+    <div class="flex-flex-col gap-2">
+      <div class="flex gap-3 items-center">
+        <div class="w-4">
+          <img src="/assets/vectors/pin.svg" alt="session duration" />
+        </div>
+        <div>{session.data.location}</div>
+      </div>
+      <div class="flex gap-3 items-center">
+        <div class="w-4">
+          <img src="/assets/vectors/time.svg" alt="session duration" />
+        </div>
+        <div>{durationMinutes} mins</div>
+      </div>
+    </div>
+  </div>
+  <div class="mb-3 mt-auto border border-t-0 border-gray-400/50"></div>
+  <div class="flex flex-row">
+    <div class="flex-none w-10 pr-3">
+      <img
+        class="rounded-full"
+        src={`/assets/images/speakers/${speaker.data.image}`}
+        alt={speaker.data.name}
+      />
+    </div>
+    <div class="flex-1">
+      <p class="text-md">{speaker.data.name}</p>
+    </div>
+  </div>
+</a>
