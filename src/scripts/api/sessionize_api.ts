@@ -1,23 +1,44 @@
 interface ScheduleDay {
     date: string,
-    rooms: ScheduleRooms[]
+    rooms: ScheduleRoom[]
+    timeSlots: ScheduleSlot[]
 }
 
-interface ScheduleRooms {
+interface ScheduleSlot {
+    slotStart: string,
+    rooms: ScheduleSlotRoom[],
+}
+
+export interface ScheduleSlotRoom {
     id: number,
-    session: ScheduleSession[],
+    name: string,
+    session: ScheduleSession,
 }
 
 interface ScheduleSession {
     id: string,
     title: string,
     startsAt: string,
-    endAt: string,
+    endsAt: string,
     isServiceSession: boolean,
     info?: SessionInfo,
 }
 
-interface SessionInfo {
+interface ScheduleRoom {
+    id: number,
+    sessions: ScheduleSession[],
+}
+
+interface ScheduleSession {
+    id: string,
+    title: string,
+    startsAt: string,
+    endsAt: string,
+    isServiceSession: boolean,
+    info?: SessionInfo,
+}
+
+export interface SessionInfo {
     id: string,
     title: string,
     description: string,
@@ -32,7 +53,7 @@ interface SessionInfo {
     language: string,
 }
 
-interface Speaker {
+export interface Speaker {
     id: string,
     slug: string,
     firstName: string,
@@ -58,31 +79,25 @@ async function SessionizeGET(method: string): Promise<any> {
     return object;
 }
 
-async function getSchedule() {
+export async function getSchedule(): Promise<Promise<ScheduleDay[]>> {
     const sessionsInfo = await getSessions(true);
-    const schedule = await SessionizeGET('GridSmart');
-    let sessions: any[] = []
+    const schedule: ScheduleDay[] = await SessionizeGET('GridSmart');
 
     schedule.forEach(
-        day => day.rooms.forEach(
-            r => sessions = [...r.sessions, ...sessions],
+        day => day.timeSlots.forEach(
+            slot => slot.rooms.forEach(
+                room => {
+                    const sessionInfoFound = sessionsInfo.find((_s) => _s.id == room.session.id);
+                    room.session.info = sessionInfoFound;
+                },
+            ),
         ),
     );
 
-    let sessionRooms = schedule.map(
-        day => day.rooms.map(
-            r => ({ "id": r.id, "name": r.name })
-        ),
-    )
-
-
-
-    return {
-
-    }
+    return schedule;
 }
 
-async function getSessions(includeSpeakers: boolean = false): Promise<SessionInfo[]> {
+export async function getSessions(includeSpeakers: boolean = false): Promise<SessionInfo[]> {
     const sessionResult: any[] = await SessionizeGET('Sessions');
     const speakers = includeSpeakers ? await getSpeakers() : null;
 
@@ -125,12 +140,14 @@ function parseSession(sessionRaw: any, speakers: Speaker[] | null): SessionInfo 
         const sessionIds: string[] = sessionRaw.speakers.map(s => s.id);
         const speakersFound = speakers.filter(({ id }) => sessionIds.includes(id));
         session.speakers = speakersFound;
+
+        console.log(session.speakers);
     }
 
     return session;
 }
 
-async function getSpeakers(includeSessions: boolean = false): Promise<Speaker[]> {
+export async function getSpeakers(includeSessions: boolean = false): Promise<Speaker[]> {
     const speakersResult: any[] = await SessionizeGET('Speakers');
     const sessions = includeSessions ? await getSessions() : null;
 
