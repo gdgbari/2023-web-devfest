@@ -1,20 +1,17 @@
 ---
-import { CollectionEntry } from "astro:content";
-import SpeakersLinks from "./SpeakersLinks.astro";
+import { Speaker } from "../../scripts/api/sessionize_api";
 
 interface Props {
-  speaker: CollectionEntry<"speakers">;
+  speaker: Speaker;
 }
 
 const { speaker } = Astro.props;
 
-const imgUrl = `/assets/images/speakers/${speaker.data.image}`;
-
-const words = speaker.body.split(" ");
+const words = speaker.bio ? speaker.bio.split(" ") : [];
 let body = words.slice(0, 20).join(" ");
 
-const { twitter, instagram, facebook, websites, linkedin, github } =
-  speaker.data;
+// const { twitter, instagram, facebook, websites, linkedin, github } =
+//   speaker.;
 
 if (words.length > 15) {
   body += "...";
@@ -23,14 +20,18 @@ if (words.length > 15) {
 
 <a
   href={`/speakers/${speaker.slug}`}
-  class="bg-white p-3 shadow-md hover:shadow-lg flex flex-col items-center text-center duration-150 ease-in"
+  class="bg-white p-3 h-full w-full shadow-md hover:shadow-lg flex flex-col items-center text-center duration-150 ease-in"
 >
-  <img src={imgUrl} alt={speaker.data.name} class="w-32 h-32 rounded-full" />
-  <p class="my-2 font-medium">{speaker.data.name}</p>
-  <p class="mb-4">{speaker.data.tagline}</p>
+  <img
+    src={speaker.profilePicture}
+    alt={speaker.fullName}
+    class="w-32 h-32 rounded-full"
+  />
+  <p class="my-2 font-medium">{speaker.fullName}</p>
+  <p class="mb-4">{speaker.tagline}</p>
 
   <p class="text-sm mb-2">{body}</p>
-
+  <!-- 
   <SpeakersLinks
     linkedin={linkedin}
     twitter={twitter}
@@ -38,5 +39,5 @@ if (words.length > 15) {
     websites={websites}
     facebook={facebook}
     instagram={instagram}
-  />
+  /> -->
 </a>

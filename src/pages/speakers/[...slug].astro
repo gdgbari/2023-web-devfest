@@ -1,15 +1,14 @@
 ---
-import { CollectionEntry, getCollection } from "astro:content";
 import BaseLayout from "../../components/Common/BaseLayout.astro";
-import SpeakersLinks from "../../components/Speakers/SpeakersLinks.astro";
+import { Speaker, getSpeakers } from "../../scripts/api/sessionize_api";
 // 1. Generate a new path for every collection entry
 
 interface Props {
-  entry: CollectionEntry<"speakers">;
+  entry: Speaker;
 }
 
 export async function getStaticPaths() {
-  const speakerEntries = await getCollection("speakers");
+  const speakerEntries = await getSpeakers();
   return speakerEntries.map((entry) => ({
     params: { slug: entry.slug },
     props: { entry },
@@ -18,7 +17,6 @@ export async function getStaticPaths() {
 
 // 2. When it's time to render, you can get the entry directly from the prop
 const { entry } = Astro.props;
-const { Content } = await entry.render();
 ---
 
 <BaseLayout pageTitle="Schedule">
@@ -26,33 +24,33 @@ const { Content } = await entry.render();
     <div class="flex md:flex-row flex-col items-center mb-10">
       <div class="flex-none w-40 mb-2">
         <img
-          src={`/assets/images/speakers/${entry.data.image}`}
-          alt={entry.data.name}
+          src={entry.profilePicture}
+          alt={entry.fullName}
           class="rounded-full"
         />
       </div>
       <div class="flex-1 pl-6 flex flex-col md:items-start items-center">
-        <h2 class="text-4xl mb-1">{entry.data.name}</h2>
-        <p class="text-lg mb-3">{entry.data.tagline}</p>
-
+        <h2 class="text-4xl mb-1">{entry.fullName}</h2>
+        <p class="text-lg mb-3">{entry.tagline}</p>
+        <!-- 
         {
           entry.data.community != null && (
             <div class="py-1 px-2 rounded-sm bg-green-600 text-white">
               {entry.data.community}
             </div>
           )
-        }
+        } -->
         <div class="py-2"></div>
-        <SpeakersLinks
+        <!-- <SpeakersLinks
           linkedin={entry.data.linkedin}
           twitter={entry.data.twitter}
           github={entry.data.github}
           websites={entry.data.websites}
           facebook={entry.data.facebook}
           instagram={entry.data.instagram}
-        />
+        /> -->
       </div>
     </div>
-    <Content />
+    <p>{entry.bio}</p>
   </div>
 </BaseLayout>
