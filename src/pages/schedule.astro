@@ -1,8 +1,8 @@
 ---
 import BaseLayout from "../components/Common/BaseLayout.astro";
 import ScheduleCard from "../components/Schedule/ScheduleCard.astro";
-import ScheduleSessionCard from "../components/Schedule/ScheduleSessionCard.astro";
 import { ScheduleItem } from "../models/ScheduleItem";
+import { getSchedule } from "../scripts/api/sessionize_api";
 
 const registrationScheduleItem: ScheduleItem = {
   showOnAllTracks: true,
@@ -11,91 +11,41 @@ const registrationScheduleItem: ScheduleItem = {
   end: new Date("2021-10-01T09:00:00-04:00"),
 };
 
-const openingScheduleItem: ScheduleItem = {
-  showOnAllTracks: true,
-  title: "Opening",
-  start: new Date("2021-10-01T08:00:00-04:00"),
-  end: new Date("2021-10-01T09:00:00-04:00"),
-};
+const schedule = await getSchedule();
 
-const launchScheduleItem: ScheduleItem = {
-  showOnAllTracks: true,
-  title: "Launch",
-  start: new Date("2021-10-01T08:00:00-04:00"),
-  end: new Date("2021-10-01T09:00:00-04:00"),
-};
-
-const coffeBreakScheduleItem: ScheduleItem = {
-  showOnAllTracks: true,
-  title: "Certo! Certo! E' coffe break signori!",
-  start: new Date("2021-10-01T08:00:00-04:00"),
-  end: new Date("2021-10-01T09:00:00-04:00"),
-};
-
-const closingScheduleItem: ScheduleItem = {
-  showOnAllTracks: true,
-  title: "Closing",
-  start: new Date("2021-10-01T08:00:00-04:00"),
-  end: new Date("2021-10-01T09:00:00-04:00"),
-};
+console.log((schedule[0] as any).timeSlots[2].rooms[0]);
 ---
 
 <BaseLayout pageTitle="Schedule">
-  <div class="grid grid-flow-row lg:grid-cols-4 grid-cols-1 gap-4">
-    <div class="lg:col-span-4">
-      <ScheduleCard value={registrationScheduleItem} />
-    </div>
-    <div class="lg:col-span-4">
-      <ScheduleCard value={openingScheduleItem} />
-    </div>
-    <div class="col-span-1">
-      <ScheduleSessionCard />
-    </div>
-    <div class="col-span-1">
-      <ScheduleSessionCard />
-    </div>
-    <div class="col-span-1">
-      <ScheduleSessionCard />
-    </div>
-    <div class="lg:col-span-1">
-      <ScheduleSessionCard />
-    </div>
-    <div class="lg:col-span-4">
-      <ScheduleCard value={launchScheduleItem} />
-    </div>
+  {
+    schedule.map((s) => {
+      const totalRooms = s.rooms.length;
 
-    <div class="col-span-1">
-      <ScheduleSessionCard />
-    </div>
-    <div class="col-span-1">
-      <ScheduleSessionCard />
-    </div>
-    <div class="col-span-1">
-      <ScheduleSessionCard />
-    </div>
-    <div class="col-span-1">
-      <ScheduleSessionCard />
-    </div>
+      return (
+        <div class="mb-5">
+          <p class="text-3xl font-bold mb-5">{new Date(s.date).toLocaleDateString('it-IT')}</p>
+          <div
+            class={`grid grid-flow-row lg:grid-cols-${totalRooms} grid-cols-1 gap-4`}
+          >
+            {s.timeSlots.map((ts) =>
+              ts.rooms.map((tsr) => {
+                const useFullRow =
+                  tsr.session.isServiceSession || ts.rooms.length == 1;
+                  
+                const colspanClass = `lg:col-span-${
+                  useFullRow ? totalRooms : 1
+                }`;
 
-    <div class="lg:col-span-4">
-      <ScheduleCard value={coffeBreakScheduleItem} />
-    </div>
-
-    <div class="col-span-1">
-      <ScheduleSessionCard />
-    </div>
-    <div class="col-span-1">
-      <ScheduleSessionCard />
-    </div>
-    <div class="col-span-1">
-      <ScheduleSessionCard />
-    </div>
-    <div class="col-span-1">
-      <ScheduleSessionCard />
-    </div>
-
-    <div class="lg:col-span-4">
-      <ScheduleCard value={closingScheduleItem} />
-    </div>
-  </div>
+                return (
+                  <div class={colspanClass}>
+                    <ScheduleCard value={tsr} />
+                  </div>
+                );
+              })
+            )}
+          </div>
+        </>
+      );
+    })
+  }
 </BaseLayout>

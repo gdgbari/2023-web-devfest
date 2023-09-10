@@ -1,21 +1,46 @@
 ---
-import { ScheduleItem } from "../../models/ScheduleItem";
+import { ScheduleSlotRoom } from "../../scripts/api/sessionize_api";
+import { formatTime } from "../../scripts/time_utils";
 
 interface Props {
-  value: ScheduleItem;
+  value: ScheduleSlotRoom;
 }
 
 const { value } = Astro.props;
+
+const start = new Date(value.session.startsAt);
+const end = new Date(value.session.endsAt);
+
+const hasSpeakers = value.session.info && value.session.info.speakers;
+
+console.log(value.session);
 ---
 
-<div class="p-4 border border-gray-400 rounded-md h-40 flex flex-col">
-  <p class="text-xl font-medium">{value.title}</p>
-  <div class="flex flex-row mt-auto justify-between">
-    <div>
-      <p>Aula magna</p>
+<div class="p-4 border border-gray-400 rounded-md h-52 flex flex-col">
+  <p class="text-xl font-medium">{value.session.title}</p>
+  <div class="flex flex-row mt-auto justify-between align-center">
+    <div class="flex flex-col gap-2">
+      {
+        hasSpeakers &&
+          value.session.info?.speakers!.map((speaker) => (
+            <div class="flex flex-row">
+              <div class="flex-none w-10 pr-3">
+                <img
+                  class="rounded-full"
+                  src={speaker.profilePicture}
+                  alt={speaker.fullName}
+                />
+              </div>
+              <div class="flex-1">
+                <p class="text-md">{speaker.fullName}</p>
+              </div>
+            </div>
+          ))
+      }
     </div>
-    <div>
-      <p>10:00 - 12:00</p>
+    <div class="flex flex-col gap-1 justify-center">
+      {!value.session.isServiceSession && <p>{value.name}</p>}
+      <p>{formatTime(start)} - {formatTime(end)}</p>
     </div>
   </div>
 </div>
