@@ -1,8 +1,6 @@
 ---
 import { CollectionEntry, getCollection, getEntry } from "astro:content";
 import BaseLayout from "../../components/Common/BaseLayout.astro";
-import { generateSessionCalendarEvent } from "../../scripts/calendar_helper";
-// 1. Generate a new path for every collection entry
 
 interface Props {
   entry: CollectionEntry<"sessions">;
@@ -110,6 +108,7 @@ function formatDate(date: Date) {
   const pageUrl = window.location.href;
 
   const addToCalendar = document.querySelector(".add-to-calendar");
+  
   addToCalendar?.addEventListener("click", () => {
     const timeStart = addToCalendar.getAttribute("time-start");
     const timeEnd = addToCalendar.getAttribute("time-end");
