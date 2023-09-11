@@ -40,15 +40,16 @@ interface ScheduleSession {
 
 export interface SessionInfo {
     id: string,
+    slug: string,
     title: string,
     description: string,
     startsAt: string,
-    endAt: string,
+    endsAt: string,
     speakers?: Speaker[],
     roomId: number,
     room: string,
     sessionLevel: string,
-    topic: string[],
+    topics: string[],
     sessionType: string,
     language: string,
 }
@@ -60,9 +61,15 @@ export interface Speaker {
     lastName: string,
     fullName: string,
     bio: string,
-    tagline: string,
+    tagLine: string,
     sessions?: SessionInfo[],
     profilePicture: string,
+    linkedin?: string,
+    twitter?: string,
+    github?: string,
+    websites?: string[],
+    facebook?: string,
+    instagram?: string
 }
 
 // GLOBAL VARS
@@ -109,16 +116,19 @@ export async function getSessions(includeSpeakers: boolean = false): Promise<Ses
 }
 
 function parseSession(sessionRaw: any, speakers: Speaker[] | null): SessionInfo {
+    const sessionSlug = sessionRaw.title.toLowerCase().replace(' ', '-');
+
     const session: SessionInfo = {
         id: sessionRaw.id,
+        slug: sessionSlug,
         title: sessionRaw.title,
         description: sessionRaw.description,
         startsAt: sessionRaw.startsAt,
-        endAt: sessionRaw.endAt,
+        endsAt: sessionRaw.endsAt,
         roomId: sessionRaw.roomId,
         room: sessionRaw.room,
         sessionLevel: "",
-        topic: [],
+        topics: [],
         sessionType: "",
         language: ""
     };
@@ -132,7 +142,7 @@ function parseSession(sessionRaw: any, speakers: Speaker[] | null): SessionInfo 
     }).reduce((props, cf) => Object.assign(props, cf), {});
 
     session.language = additionalProperties.language[0];
-    session.topic = additionalProperties.topic;
+    session.topics = additionalProperties.topic;
     session.sessionType = additionalProperties['session_type'][0];
     session.sessionLevel = additionalProperties['session_level'][0];
 
@@ -140,8 +150,6 @@ function parseSession(sessionRaw: any, speakers: Speaker[] | null): SessionInfo 
         const sessionIds: string[] = sessionRaw.speakers.map(s => s.id);
         const speakersFound = speakers.filter(({ id }) => sessionIds.includes(id));
         session.speakers = speakersFound;
-
-        console.log(session.speakers);
     }
 
     return session;
@@ -158,18 +166,52 @@ export async function getSpeakers(includeSessions: boolean = false): Promise<Spe
 
 
 function parseSpeaker(speakerRaw: any, sessions: SessionInfo[] | null) {
-    const speaker_slug = `${speakerRaw.firstName.toLowerCase()}-${speakerRaw.lastName.toLowerCase()}`;
+    const speakerSlug = `${speakerRaw.firstName.toLowerCase()}-${speakerRaw.lastName.toLowerCase()}`;
 
     const speaker: Speaker = {
         id: speakerRaw.id,
-        slug: speaker_slug,
+        slug: speakerSlug,
         firstName: speakerRaw.firstName,
         lastName: speakerRaw.lastName,
         fullName: speakerRaw.fullName,
         bio: speakerRaw.bio,
-        tagline: speakerRaw.tagline,
+        tagLine: speakerRaw.tagLine,
         profilePicture: speakerRaw.profilePicture,
     };
+
+    speaker.websites = [];
+
+    if (speakerRaw.links) {
+        (speakerRaw.links as any[]).forEach(link => {
+            const linkType = link.linkType.toLowerCase();
+
+            switch (linkType) {
+                case 'linkedin':
+                    speaker.linkedin = link.url;
+                    break;
+                case 'twitter':
+                    speaker.twitter = link.url;
+                    break;
+                case 'github':
+                    speaker.github = link.url;
+                    break;
+                case 'facebook':
+                    speaker.facebook = link.url;
+                    break;
+                case 'instagram':
+                    speaker.instagram = link.url;
+                case 'company_website':
+                case 'blog':
+                default:
+                    speaker.websites!.push(link.url);
+                    break;
+
+
+            }
+        });
+
+
+    }
 
     if (sessions) {
         const sessionIds: string[] = speakerRaw.sessions.map(s => s.id);
