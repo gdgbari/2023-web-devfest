@@ -1,30 +1,16 @@
 ---
-import { getCollection, getEntry } from "astro:content";
-
 import BaseLayout from "../../components/Common/BaseLayout.astro";
 import SessionCard from "../../components/Sessions/SessionCard.astro";
+import { getSessions } from "../../scripts/api/sessionize_api";
 
 // is your "component frontmatter". It never runs in the browser.
 console.log("This runs in your terminal, not the browser!");
 
-const sessions = await getCollection("sessions");
-
-console.log(sessions.map((s) => s.data.speaker.slug));
-
-const speakersEntries = await Promise.all(
-  sessions.map((s) => getEntry(s.data.speaker))
-);
-
-const speakerDict = {};
-speakersEntries.forEach((s) => (speakerDict[s!.slug] = s!));
+const sessions = await getSessions(true);
 ---
 
 <BaseLayout pageTitle="Sessions">
   <div class="grid lg:grid-cols-3 md:grid-cols-2 grid-flow-row gap-4 mt-5 mb-7">
-    {
-      sessions.map((s) => (
-       <SessionCard session={s} speaker={speakerDict[s.data.speaker.slug]} />
-      ))
-    }
+    {sessions.map((s) => <SessionCard session={s} />)}
   </div>
 </BaseLayout>

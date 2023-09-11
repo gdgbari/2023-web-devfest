@@ -1,13 +1,14 @@
 ---
 import { CollectionEntry, getCollection, getEntry } from "astro:content";
 import BaseLayout from "../../components/Common/BaseLayout.astro";
+import { SessionInfo, getSessions } from "../../scripts/api/sessionize_api";
 
 interface Props {
-  entry: CollectionEntry<"sessions">;
+  entry: SessionInfo;
 }
 
 export async function getStaticPaths() {
-  const sessions = await getCollection("sessions");
+  const sessions = await getSessions(true);
   return sessions.map((entry) => ({
     params: { slug: entry.slug },
     props: { entry },
@@ -16,24 +17,26 @@ export async function getStaticPaths() {
 
 // 2. When it's time to render, you can get the entry directly from the prop
 const { entry } = Astro.props;
-const { Content } = await entry.render();
 
-var date = entry.data.dateStart.toLocaleDateString("en-US", {
+const dateStart = new Date(entry.startsAt);
+const dateEnd = new Date(entry.endsAt);
+
+var date = dateStart.toLocaleDateString("en-US", {
   day: "numeric",
   month: "short",
 });
 
-const start = entry.data.dateStart.toLocaleTimeString("en-US", {
+const start = dateStart.toLocaleTimeString("en-US", {
   hour: "numeric",
   minute: "numeric",
 });
 
-const end = entry.data.dateEnd.toLocaleTimeString("en-US", {
+const end = dateEnd.toLocaleTimeString("en-US", {
   hour: "numeric",
   minute: "numeric",
 });
 
-var speaker = await getEntry(entry.data.speaker);
+var speaker = entry.speakers![0];
 
 function formatDate(date: Date) {
   const year = date.getUTCFullYear();
@@ -50,27 +53,27 @@ function formatDate(date: Date) {
 
 <BaseLayout pageTitle="Sessions">
   <div class="flex md:flex-row flex-col justify-between md:items-center items-start  gap-2 mb-6 cursor-pointer">
-    <h2 class="text-4xl mb-3">{entry.data.title}</h2>
+    <h2 class="text-4xl mb-3">{entry.title}</h2>
     <div
       class="add-to-calendar m-y py-2 px-4 rounded-r-sm hover:bg-amber-400/20 border border-amber-600 text-amber-600 ease-in duration-100 text-center"
-      time-start={formatDate(entry.data.dateStart)}
-      time-end={formatDate(entry.data.dateEnd)}
+      time-start={formatDate(dateStart)}
+      time-end={formatDate(dateEnd)}
       session-details={encodeURIComponent(
-        `Speaker: ${speaker.data.name} \nTopics: ${entry.data.tags.join(" ")}`
+        `Speaker: ${speaker.fullName} \nTopics: ${entry.topics.join(" ")}`
       )}
-      session-title={entry.data.title}
-      session-location={entry.data.location}
+      session-title={entry.title}
+      session-location={entry.room}
     >
       Aggiungi al calendario
     </div>
   </div>
   <div class="flex flex-wrap gap-2 mb-6">
     <div class="py-1 px-2 rounded-md bg-green-600 text-white">
-      <span class="text-sm">{entry.data.level}</span>
+      <span class="text-sm">{entry.sessionLevel}</span>
     </div>
 
     {
-      entry.data.tags.map((t) => (
+      entry.topics.map((t) => (
         <div class="py-1 px-2 rounded-md bg-gray-200 text-gray-800">
           <span class="text-sm">{t}</span>
         </div>
@@ -78,10 +81,12 @@ function formatDate(date: Date) {
     }
   </div>
   <div class="mb-6">
-    <p class="text-lg">{entry.data.location}</p>
+    <p class="text-lg">{entry.room}</p>
     <p class="text-lg">{date}, {start} - {end}</p>
   </div>
-  <Content />
+
+  <p>{entry.description}</p>
+  
   <div class="mt-10">
     <p class="text-3xl mb-6">Speakers</p>
 
@@ -91,14 +96,14 @@ function formatDate(date: Date) {
     >
       <div class="flex-none w-24 mb-2">
         <img
-          src={`/assets/images/speakers/${speaker.data.image}`}
-          alt={speaker.data.name}
+          src={speaker.profilePicture}
+          alt={speaker.fullName}
           class="rounded-full"
         />
       </div>
       <div class="flex-1 pl-6 flex flex-col md:items-start items-center">
-        <h2 class="text-4xl mb-1">{speaker.data.name}</h2>
-        <p class="text-lg mb-3">{speaker.data.tagline}</p>
+        <h2 class="text-4xl mb-1">{speaker.fullName}</h2>
+        <p class="text-lg mb-3">{speaker.tagLine}</p>
       </div>
     </a>
   </div>
