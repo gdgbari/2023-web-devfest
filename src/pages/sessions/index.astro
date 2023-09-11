@@ -4,7 +4,6 @@ import SessionCard from "../../components/Sessions/SessionCard.astro";
 import { getSessions } from "../../scripts/api/sessionize_api";
 
 // is your "component frontmatter". It never runs in the browser.
-console.log("This runs in your terminal, not the browser!");
 
 const sessions = await getSessions(true);
 ---
