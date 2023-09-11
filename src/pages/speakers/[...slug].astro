@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../components/Common/BaseLayout.astro";
+import SpeakersLinks from "../../components/Speakers/SpeakersLinks.astro";
 import { Speaker, getSpeakers } from "../../scripts/api/sessionize_api";
 // 1. Generate a new path for every collection entry
 
@@ -31,7 +32,7 @@ const { entry } = Astro.props;
       </div>
       <div class="flex-1 pl-6 flex flex-col md:items-start items-center">
         <h2 class="text-4xl mb-1">{entry.fullName}</h2>
-        <p class="text-lg mb-3">{entry.tagline}</p>
+        <p class="text-lg mb-3">{entry.tagLine}</p>
         <!-- 
         {
           entry.data.community != null && (
@@ -41,14 +42,14 @@ const { entry } = Astro.props;
           )
         } -->
         <div class="py-2"></div>
-        <!-- <SpeakersLinks
-          linkedin={entry.data.linkedin}
-          twitter={entry.data.twitter}
-          github={entry.data.github}
-          websites={entry.data.websites}
-          facebook={entry.data.facebook}
-          instagram={entry.data.instagram}
-        /> -->
+        <SpeakersLinks
+          linkedin={entry.linkedin}
+          twitter={entry.twitter}
+          github={entry.github}
+          websites={entry.websites}
+          facebook={entry.facebook}
+          instagram={entry.instagram}
+        />
       </div>
     </div>
     <p>{entry.bio}</p>

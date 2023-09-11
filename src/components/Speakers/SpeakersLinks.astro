@@ -12,39 +12,58 @@ const { twitter, instagram, facebook, websites, linkedin, github } =
   Astro.props;
 ---
 
-
 <div class="flex flex-row items-center">
   {
     linkedin && (
-      <div class="mr-3 cursor-pointer" role="button" onclick={`window.location.href = '${linkedin}'`}>
+      <div
+        class="mr-3 cursor-pointer"
+        role="button"
+        speaker-href={linkedin}
+      >
         <img class="w-6" src="/assets/vectors/linkedin_logo.svg" />
       </div>
     )
   }
   {
     github && (
-      <div class="mr-3 cursor-pointer" role="button" onclick={`window.location.href = '${github}'`}>
+      <div
+        class="mr-3 cursor-pointer"
+        role="button"
+        speaker-href={github}
+      >
         <img class="w-6" src="/assets/vectors/github_logo.svg" />
       </div>
     )
   }
   {
     facebook && (
-      <div class="mr-3 cursor-pointer" role="button" onclick={`window.location.href = '${facebook}'`}>
+      <div
+        class="mr-3 cursor-pointer"
+        role="button"
+        speaker-href={facebook}
+      >
         <img class="w-6" src="/assets/vectors/facebook_logo.svg" />
       </div>
     )
   }
   {
     instagram && (
-      <div class="mr-3 cursor-pointer" role="button"  onclick={`window.location.href = '${instagram}'`}>
+      <div
+        class="mr-3 cursor-pointer"
+        role="button"
+        speaker-href={instagram}
+      >
         <img class="w-6" src="/assets/vectors/instagram_logo.svg" />
       </div>
     )
   }
   {
     twitter && (
-      <div class="mr-3 cursor-pointer" role="button" onclick={`window.location.href = '${twitter}'`}>
+      <div
+        class="mr-3 cursor-pointer"
+        role="button"
+        speaker-href={twitter}
+      >
         <img class="w-6" src="/assets/vectors/twitter_logo.svg" />
       </div>
     )
@@ -52,7 +71,11 @@ const { twitter, instagram, facebook, websites, linkedin, github } =
   {
     websites &&
       websites.map((website) => (
-        <div class="mr-3 cursor-pointer" role="button" onclick={`window.location.href = '${website}'`}>
+        <div
+          class="mr-3 cursor-pointer"
+          speaker-href={website}
+          role="button"
+        >
           <img class="w-6" src="/assets/vectors/web_logo.svg" />
         </div>
       ))

@@ -1,5 +1,6 @@
 ---
 import { Speaker } from "../../scripts/api/sessionize_api";
+import SpeakersLinks from "./SpeakersLinks.astro";
 
 interface Props {
   speaker: Speaker;
@@ -10,8 +11,7 @@ const { speaker } = Astro.props;
 const words = speaker.bio ? speaker.bio.split(" ") : [];
 let body = words.slice(0, 20).join(" ");
 
-// const { twitter, instagram, facebook, websites, linkedin, github } =
-//   speaker.;
+const { twitter, instagram, facebook, websites, linkedin, github } = speaker;
 
 if (words.length > 15) {
   body += "...";
@@ -28,16 +28,18 @@ if (words.length > 15) {
     class="w-32 h-32 rounded-full"
   />
   <p class="my-2 font-medium">{speaker.fullName}</p>
-  <p class="mb-4">{speaker.tagline}</p>
+  <p class="mb-4">{speaker.tagLine}</p>
 
   <p class="text-sm mb-2">{body}</p>
-  <!-- 
-  <SpeakersLinks
-    linkedin={linkedin}
-    twitter={twitter}
-    github={github}
-    websites={websites}
-    facebook={facebook}
-    instagram={instagram}
-  /> -->
+
+  <div class="mt-auto">
+    <SpeakersLinks
+      linkedin={linkedin}
+      twitter={twitter}
+      github={github}
+      websites={websites}
+      facebook={facebook}
+      instagram={instagram}
+    />
+  </div>
 </a>
