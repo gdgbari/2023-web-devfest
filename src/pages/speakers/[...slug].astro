@@ -2,22 +2,23 @@
 import BaseLayout from "../../components/Common/BaseLayout.astro";
 import SpeakersLinks from "../../components/Speakers/SpeakersLinks.astro";
 import { Speaker, getSpeakers } from "../../scripts/api/sessionize_api";
-// 1. Generate a new path for every collection entry
+import { formatTime } from "../../scripts/time_utils";
+// 1. Generate a new path for every collection speaker
 
 interface Props {
-  entry: Speaker;
+  speaker: Speaker;
 }
 
 export async function getStaticPaths() {
-  const speakerEntries = await getSpeakers();
-  return speakerEntries.map((entry) => ({
-    params: { slug: entry.slug },
-    props: { entry },
+  const speakerEntries = await getSpeakers(true);
+  return speakerEntries.map((speaker) => ({
+    params: { slug: speaker.slug },
+    props: { speaker },
   }));
 }
 
-// 2. When it's time to render, you can get the entry directly from the prop
-const { entry } = Astro.props;
+// 2. When it's time to render, you can get the speaker directly from the prop
+const { speaker } = Astro.props;
 ---
 
 <BaseLayout pageTitle="Schedule">
@@ -25,33 +26,70 @@ const { entry } = Astro.props;
     <div class="flex md:flex-row flex-col items-center mb-10">
       <div class="flex-none w-40 mb-2">
         <img
-          src={entry.profilePicture}
-          alt={entry.fullName}
+          src={speaker.profilePicture}
+          alt={speaker.fullName}
           class="rounded-full"
         />
       </div>
       <div class="flex-1 pl-6 flex flex-col md:items-start items-center">
-        <h2 class="text-4xl mb-1">{entry.fullName}</h2>
-        <p class="text-lg mb-3">{entry.tagLine}</p>
+        <h2 class="text-4xl mb-1">{speaker.fullName}</h2>
+        <p class="text-lg mb-3">{speaker.tagLine}</p>
         <!-- 
         {
-          entry.data.community != null && (
+          speaker.data.community != null && (
             <div class="py-1 px-2 rounded-sm bg-green-600 text-white">
-              {entry.data.community}
+              {speaker.data.community}
             </div>
           )
         } -->
         <div class="py-2"></div>
         <SpeakersLinks
-          linkedin={entry.linkedin}
-          twitter={entry.twitter}
-          github={entry.github}
-          websites={entry.websites}
-          facebook={entry.facebook}
-          instagram={entry.instagram}
+          linkedin={speaker.linkedin}
+          twitter={speaker.twitter}
+          github={speaker.github}
+          websites={speaker.websites}
+          facebook={speaker.facebook}
+          instagram={speaker.instagram}
         />
       </div>
     </div>
-    <p>{entry.bio}</p>
+    <p>{speaker.bio}</p>
+
+    <div class="mt-5">
+      <h3 class="text-3xl font-bold mb-4">Sessions</h3>
+      <ul class="flex flex-col gap-2">
+        {
+          speaker.sessions &&
+            speaker.sessions!.map((session) => {
+              const dateStart = new Date(session.startsAt);
+              const dateEnd = new Date(session.endsAt);
+
+              const date = dateStart.toLocaleDateString("en-US", {
+                month: "long",
+                day: "numeric",
+              });
+              const startTime = formatTime(dateStart);
+              const endTime = formatTime(dateEnd);
+
+              return (
+                <a class="flex flex-col" href={`/sessions/${session.slug}`}>
+                  <p class="text-xl font-medium"> {session.title}</p>
+                  <p>
+                    {date}, {startTime} - {endTime}
+                  </p>
+                  <p>{session.room}</p>
+                  <div class="flex gap-3 mt-3">
+                    {session.topics.map((t) => (
+                      <div class="py-1 px-2 rounded-md bg-gray-200 text-gray-800">
+                        <span class="text-sm">{t}</span>
+                      </div>
+                    ))}
+                  </div>
+                </a>
+              );
+            })
+        }
+      </ul>
+    </div>
   </div>
 </BaseLayout>

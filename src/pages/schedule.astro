@@ -12,8 +12,6 @@ const registrationScheduleItem: ScheduleItem = {
 };
 
 const schedule = await getSchedule();
-
-console.log((schedule[0] as any).timeSlots[2].rooms[0]);
 ---
 
 <BaseLayout pageTitle="Schedule">
@@ -23,7 +21,13 @@ console.log((schedule[0] as any).timeSlots[2].rooms[0]);
 
       return (
         <div class="mb-5">
-          <p class="text-3xl font-bold mb-5">{new Date(s.date).toLocaleDateString('it-IT')}</p>
+          <p class="text-3xl font-bold mb-5">
+            {new Date(s.date).toLocaleDateString("en-US", {
+              day: "numeric",
+              month: "long",
+              weekday: "long",
+            })}
+          </p>
           <div
             class={`grid grid-flow-row lg:grid-cols-${totalRooms} grid-cols-1 gap-4`}
           >
@@ -31,7 +35,7 @@ console.log((schedule[0] as any).timeSlots[2].rooms[0]);
               ts.rooms.map((tsr) => {
                 const useFullRow =
                   tsr.session.isServiceSession || ts.rooms.length == 1;
-                  
+
                 const colspanClass = `lg:col-span-${
                   useFullRow ? totalRooms : 1
                 }`;
@@ -44,7 +48,7 @@ console.log((schedule[0] as any).timeSlots[2].rooms[0]);
               })
             )}
           </div>
-        </>
+        </div>
       );
     })
   }
