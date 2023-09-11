@@ -1,15 +1,9 @@
 ---
 import BaseLayout from "../components/Common/BaseLayout.astro";
 import ScheduleCard from "../components/Schedule/ScheduleCard.astro";
-import { ScheduleItem } from "../models/ScheduleItem";
 import { getSchedule } from "../scripts/api/sessionize_api";
 
-const registrationScheduleItem: ScheduleItem = {
-  showOnAllTracks: true,
-  title: "Registration",
-  start: new Date("2021-10-01T08:00:00-04:00"),
-  end: new Date("2021-10-01T09:00:00-04:00"),
-};
+
 
 const schedule = await getSchedule();
 ---
