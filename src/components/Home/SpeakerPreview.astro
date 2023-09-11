@@ -1,17 +1,16 @@
 ---
-import { getCollection } from "astro:content";
+import { getSpeakers } from "../../scripts/api/sessionize_api";
 import SpeakerPreviewElement from "./SpeakerPreviewElement.astro";
 
-let speakers = await getCollection("speakers");
+let speakers = await getSpeakers();
 
 if (speakers.length > 4) {
-  speakers = speakers.slice(0, 4);
+  speakers = speakers.sort(() => Math.random() - 0.5).slice(0, 4);
 }
 ---
 
 <div class="py-6 max-w-6xl lg:w-4/5 w-full m-auto px-4">
   <h2 class="text-6xl mb-10 font-bold">Speakers</h2>
-
   <div class="grid md:grid-cols-4 sm:grid-cols-2 grid-flow-row gap-4 mt-5 mb-7">
     {
       speakers.map((s) => (
@@ -22,5 +21,8 @@ if (speakers.length > 4) {
     }
   </div>
 
-  <a class="py-2 px-4 rounded-r-sm hover:bg-amber-400/20 text-amber-600 ease-in duration-100" href="/speakers">See all Speakers</a>
+  <a
+    class="py-2 px-4 rounded-r-sm hover:bg-amber-400/20 text-amber-600 ease-in duration-100"
+    href="/speakers">See all Speakers</a
+  >
 </div>

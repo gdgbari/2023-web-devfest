@@ -1,20 +1,18 @@
 ---
-import { CollectionEntry } from "astro:content";
+import { Speaker } from "../../scripts/api/sessionize_api";
 
 interface Props {
-  speaker: CollectionEntry<"speakers">;
+  speaker: Speaker;
 }
 
 const { speaker } = Astro.props;
-
-const imgUrl = `/assets/images/speakers/${speaker.data.image}`;
 ---
 
 <a
   href={`/speakers/${speaker.slug}`}
   class="bg-white p-3 flex flex-col items-center text-center"
 >
-  <img src={imgUrl} alt={speaker.data.name} class="w-32 h-32 rounded-full" />
-  <p class="my-2 font-medium">{speaker.data.name}</p>
-  <p class="">{speaker.data.tagline}</p>
+  <img src={speaker.profilePicture} alt={speaker.fullName} class="w-32 h-32 rounded-full" />
+  <p class="my-2 font-medium">{speaker.fullName}</p>
+  <p class="">{speaker.tagLine}</p>
 </a>
