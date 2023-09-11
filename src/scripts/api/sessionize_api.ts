@@ -116,8 +116,11 @@ export async function getSessions(includeSpeakers: boolean = false): Promise<Ses
 }
 
 function parseSession(sessionRaw: any, speakers: Speaker[] | null): SessionInfo {
-    const sessionSlug = sessionRaw.title.toLowerCase().replace(' ', '-');
-
+    const sessionSlug = sessionRaw.title.toLowerCase()
+        .replaceAll(' ', '-')
+        .replaceAll(/[.'/":*+?^${}()|[\]\\,“”!]/g, '')
+        .replaceAll(/-{2,}/g, '-');
+    console.log(sessionSlug);
     const session: SessionInfo = {
         id: sessionRaw.id,
         slug: sessionSlug,
@@ -166,7 +169,10 @@ export async function getSpeakers(includeSessions: boolean = false): Promise<Spe
 
 
 function parseSpeaker(speakerRaw: any, sessions: SessionInfo[] | null) {
-    const speakerSlug = `${speakerRaw.firstName.toLowerCase()}-${speakerRaw.lastName.toLowerCase()}`;
+    const speakerSlug = `${speakerRaw.firstName.toLowerCase()}-${speakerRaw.lastName.toLowerCase()}`
+        .replaceAll(' ', '-')
+        .replaceAll(/[.'/":*+?^${}()|[\]\\,“”!]/g, '')
+        .replaceAll(/-{2,}/g, '-');
 
     const speaker: Speaker = {
         id: speakerRaw.id,
@@ -214,7 +220,7 @@ function parseSpeaker(speakerRaw: any, sessions: SessionInfo[] | null) {
     }
 
     if (sessions) {
-        const sessionIds: string[] = speakerRaw.sessions.map(s => s.id);
+        const sessionIds: string[] = speakerRaw.sessions.map(s => s.id.toString());
         const sessionsFound = sessions.filter(({ id }) => sessionIds.includes(id));
         speaker.sessions = sessionsFound;
     }
