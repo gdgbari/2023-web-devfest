@@ -12,9 +12,6 @@ const { transparentMode = false } = Astro.props;
 const initialClasses = transparentMode ? "bg-trasparent" : "bg-white shadow-md";
 
 const links = [
-  { link: "/schedule", name: "Schedule" },
-  { link: "/sessions", name: "Sessions" },
-  { link: "/speakers", name: "Speakers" },
   { link: "/location", name: "Location" },
   { link: "/faq", name: "Faq" },
   { link: "/staff", name: "Staff" },
@@ -78,7 +75,7 @@ const links = [
       transparentMode ? "transparent-mode" : ""
     } flex flex-row justify-between items-center p-4 top-0 left-0 right-0 fixed z-30 ${initialClasses} ease-in duration-150`}
   >
-    <div class=" flex justify-between max-w-6xl lg:w-4/5 w-full m-auto">
+    <div class="flex justify-between max-w-6xl lg:w-4/5 w-full m-auto">
       <div class="flex gap-4">
         <div class="flex items-center gap-6 md:hidden">
           <div
@@ -121,8 +118,8 @@ const links = [
             ))
           }
           <a
-            class="py-2 px-4 rounded-r-sm bg-amber-500 hover:bg-amber-600 text-white ease-in duration-100"
-            href="https://gdg.community.dev/gdg-bari/">GET A TICKET</a
+            class="py-2 px-4 rounded-r-sm bg-amber-500/70 text-white ease-in duration-100"
+            >COMING SOON</a
           >
         </div>
       </div>

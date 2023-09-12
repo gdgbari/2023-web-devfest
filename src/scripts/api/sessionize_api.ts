@@ -120,7 +120,7 @@ function parseSession(sessionRaw: any, speakers: Speaker[] | null): SessionInfo 
         .replaceAll(' ', '-')
         .replaceAll(/[.'/":*+?^${}()|[\]\\,“”!]/g, '')
         .replaceAll(/-{2,}/g, '-');
-    console.log(sessionSlug);
+        
     const session: SessionInfo = {
         id: sessionRaw.id,
         slug: sessionSlug,

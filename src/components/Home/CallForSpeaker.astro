@@ -1,0 +1,28 @@
+---
+import { getSpeakers } from "../../scripts/api/sessionize_api";
+
+let speakers = await getSpeakers();
+
+if (speakers.length > 4) {
+  speakers = speakers.sort(() => Math.random() - 0.5).slice(0, 4);
+}
+---
+
+<div
+  class="py-10 max-w-6xl lg:w-4/5 w-full m-auto px-4  flex flex-col items-center justify-center text-center"
+>
+  <h2 class="text-6xl mb-10 font-bold">Call for speaker is open</h2>
+
+  <p class="text-lg">
+    Ready to shine on the tech stage? We invite you to submit your proposals for
+    DevFest Bari 2023. From web development to AI, cloud to cybersecurity, we
+    welcome papers on various tech topics. Your unique insights can light up our
+    event! Spread the word and seize this opportunity to be part of DevFest Bari
+    2023! We're eager to receive your talk submissions.
+  </p>
+
+  <a
+    class="mt-5 py-3 px-4 rounded-r-sm bg-amber-500 hover:bg-amber-600 text-white ease-in duration-100 text-lg"
+    href="https://sessionize.com/devfest-bari-2023/" target="_blank">Join with us</a
+  >
+</div>
