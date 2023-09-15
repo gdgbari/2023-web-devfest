@@ -12,12 +12,12 @@ const { value } = Astro.props;
   <div class="flex-none w-32 pr-3">
     <img
       class="rounded-full"
-      src={`/assets/images/speakers/${value.data.image}`}
+      src={`/assets/images/staff/${value.data.image}`}
       alt={value.data.name}
     />
   </div>
   <div class="flex-1">
-    <p class="font-medium text-2xl">{value.data.name}</p>
+    <p class="font-medium text-xl">{value.data.name}</p>
     <p>{value.data.tagline}</p>
     <div class="my-2"></div>
     <SpeakersLinks

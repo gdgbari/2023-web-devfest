@@ -32,18 +32,30 @@ const collaborators = staffCollection.filter(
     </p>
   </div>
 
-  <div class="my-3">
-    <h2 class="text-4xl font-medium mb-10">Organizers</h2>
+  {
+    organizers.length > 0 && (
+      <div class="my-3">
+        <h2 class="text-4xl font-medium mb-10">Organizers</h2>
 
-    <div class="grid lg:grid-cols-3 md:grid-cols-2 gap-4">
-      {collaborators.map((staff) => <StaffMemberCard value={staff} />)}
-    </div>
-  </div>
+        <div class="grid lg:grid-cols-3 md:grid-cols-2 gap-6">
+          {organizers.map((staff) => (
+            <StaffMemberCard value={staff} />
+          ))}
+        </div>
+      </div>
+    )
+  }
 
-  <div class="my-3">
-    <h2 class="text-4xl font-medium mb-10">Collaborators</h2>
-    <div class="grid lg:grid-cols-3 md:grid-cols-2 gap-4">
-      {collaborators.map((staff) => <StaffMemberCard value={staff} />)}
-    </div>
-  </div>
+  {
+    collaborators.length > 0 && (
+      <div class="my-3">
+        <h2 class="text-4xl font-medium mb-10">Collaborators</h2>
+        <div class="grid lg:grid-cols-3 md:grid-cols-2 gap-6">
+          {collaborators.map((staff) => (
+            <StaffMemberCard value={staff} />
+          ))}
+        </div>
+      </div>
+    )
+  }
 </BaseLayout>
