@@ -199,40 +199,40 @@ declare module 'astro:content' {
 
 	type ContentEntryMap = {
 		"externals": {
+"ass_coach.md": {
+	id: "ass_coach.md";
+  slug: "ass_coach";
+  body: string;
+  collection: "externals";
+  data: InferEntrySchema<"externals">
+} & { render(): Render[".md"] };
 "google.md": {
 	id: "google.md";
   slug: "google";
   body: string;
   collection: "externals";
-  data: any
+  data: InferEntrySchema<"externals">
 } & { render(): Render[".md"] };
 "google_gold.md": {
 	id: "google_gold.md";
   slug: "google_gold";
   body: string;
   collection: "externals";
-  data: any
+  data: InferEntrySchema<"externals">
 } & { render(): Render[".md"] };
 "google_platinum.md": {
 	id: "google_platinum.md";
   slug: "google_platinum";
   body: string;
   collection: "externals";
-  data: any
+  data: InferEntrySchema<"externals">
 } & { render(): Render[".md"] };
 "google_silver.md": {
 	id: "google_silver.md";
   slug: "google_silver";
   body: string;
   collection: "externals";
-  data: any
-} & { render(): Render[".md"] };
-"poliba_partner.md": {
-	id: "poliba_partner.md";
-  slug: "poliba_partner";
-  body: string;
-  collection: "externals";
-  data: any
+  data: InferEntrySchema<"externals">
 } & { render(): Render[".md"] };
 };
 "sessions": {
@@ -241,21 +241,21 @@ declare module 'astro:content' {
   slug: "deep_dive_flutter";
   body: string;
   collection: "sessions";
-  data: any
+  data: InferEntrySchema<"sessions">
 } & { render(): Render[".md"] };
 "flutter_1.md": {
 	id: "flutter_1.md";
   slug: "flutter_1";
   body: string;
   collection: "sessions";
-  data: any
+  data: InferEntrySchema<"sessions">
 } & { render(): Render[".md"] };
 "flutter_2.md": {
 	id: "flutter_2.md";
   slug: "flutter_2";
   body: string;
   collection: "sessions";
-  data: any
+  data: InferEntrySchema<"sessions">
 } & { render(): Render[".md"] };
 };
 "speakers": {
@@ -264,35 +264,35 @@ declare module 'astro:content' {
   slug: "anna";
   body: string;
   collection: "speakers";
-  data: any
+  data: InferEntrySchema<"speakers">
 } & { render(): Render[".md"] };
 "mike.md": {
 	id: "mike.md";
   slug: "mike";
   body: string;
   collection: "speakers";
-  data: any
+  data: InferEntrySchema<"speakers">
 } & { render(): Render[".md"] };
 "paolo.md": {
 	id: "paolo.md";
   slug: "paolo";
   body: string;
   collection: "speakers";
-  data: any
+  data: InferEntrySchema<"speakers">
 } & { render(): Render[".md"] };
 "roberto.md": {
 	id: "roberto.md";
   slug: "roberto";
   body: string;
   collection: "speakers";
-  data: any
+  data: InferEntrySchema<"speakers">
 } & { render(): Render[".md"] };
 "simone_bonfrate.md": {
 	id: "simone_bonfrate.md";
   slug: "simone_bonfrate";
   body: string;
   collection: "speakers";
-  data: any
+  data: InferEntrySchema<"speakers">
 } & { render(): Render[".md"] };
 };
 "staff": {
@@ -301,42 +301,42 @@ declare module 'astro:content' {
   slug: "anna";
   body: string;
   collection: "staff";
-  data: any
+  data: InferEntrySchema<"staff">
 } & { render(): Render[".md"] };
 "laura.md": {
 	id: "laura.md";
   slug: "laura";
   body: string;
   collection: "staff";
-  data: any
+  data: InferEntrySchema<"staff">
 } & { render(): Render[".md"] };
 "michela.md": {
 	id: "michela.md";
   slug: "michela";
   body: string;
   collection: "staff";
-  data: any
+  data: InferEntrySchema<"staff">
 } & { render(): Render[".md"] };
 "mike.md": {
 	id: "mike.md";
   slug: "mike";
   body: string;
   collection: "staff";
-  data: any
+  data: InferEntrySchema<"staff">
 } & { render(): Render[".md"] };
 "paolo.md": {
 	id: "paolo.md";
   slug: "paolo";
   body: string;
   collection: "staff";
-  data: any
+  data: InferEntrySchema<"staff">
 } & { render(): Render[".md"] };
 "simone.md": {
 	id: "simone.md";
   slug: "simone";
   body: string;
   collection: "staff";
-  data: any
+  data: InferEntrySchema<"staff">
 } & { render(): Render[".md"] };
 };
 
@@ -348,5 +348,5 @@ declare module 'astro:content' {
 
 	type AnyEntryMap = ContentEntryMap & DataEntryMap;
 
-	type ContentConfig = never;
+	type ContentConfig = typeof import("../src/content/config");
 }

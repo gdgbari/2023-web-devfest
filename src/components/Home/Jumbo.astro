@@ -10,6 +10,7 @@ import { WebsiteConfig } from "../../config";
       <p class="text-3xl">
         {
           WebsiteConfig.EVENT_START.toLocaleDateString("en-US", {
+            day: "numeric",
             month: "long",
             year: "numeric",
           })

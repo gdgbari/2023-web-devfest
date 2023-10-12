@@ -1,3 +1,6 @@
+---
+import { WebsiteConfig } from "../../config";
+---
 <div class="relative flex flex-col">
   <div class="h-128 bg-[url(/assets/images/location.png)] bg-center bg-cover">
   </div>
@@ -6,12 +9,12 @@
       class="md:absolute md:flex-none bottom-8 left-4 md:w-72 p-6 bg-amber-500 text-white"
     >
       <p class="text-3xl mb-3">The venue</p>
-      <p class="mb-3">Centre de Congrès Pierre Baudis</p>
-      <p>
+      <p class="mb-3">{WebsiteConfig.EVENT_LOCATION}</p>
+      <!-- <p>
         The Centre de Congrès Pierre Baudis is a modern place of exchange,
         located on a privileged location, in the immediate vicinity of the
         centre of Toulouse and in a green environment.
-      </p>
+      </p> -->
       <div class="flex flex-row mt-4 items-center">
         <div class="flex-1">Via Edoardo Orabona, 4, 70126 Bari</div>
         <a
