@@ -3,14 +3,7 @@ import { getCollection } from "astro:content";
 
 const external = await getCollection("externals");
 
-const mainSponsors = external.filter((ext) => ext.data.type === "sponsor_main");
-const platinumSponsors = external.filter(
-  (ext) => ext.data.type === "sponsor_platinum"
-);
-const goldSponsors = external.filter((ext) => ext.data.type === "sponsor_gold");
-const silverSponsors = external.filter(
-  (ext) => ext.data.type === "sponsor_silver"
-);
+const sponsors = external.filter((ext) => ext.data.type.startsWith("sponsor"));
 const partners = external.filter((ext) => ext.data.type === "partner");
 ---
 
@@ -20,67 +13,7 @@ const partners = external.filter((ext) => ext.data.type === "partner");
     class="grid lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-2 grid-flow-row gap-4 mb-10"
   >
     {
-      mainSponsors.map((sponsor) => (
-        <a
-          href={sponsor.data.url}
-          class="p-3 shadow-md hover:shadow-lg duration-100 ease-in"
-        >
-          <img src={sponsor.data.image} alt={sponsor.data.name} />
-        </a>
-      ))
-    }
-  </div>
-  <h2 class="text-3xl mb-10 font-medium">Main</h2>
-  <div
-    class="grid lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-2 grid-flow-row gap-4 mb-10"
-  >
-    {
-      mainSponsors.map((sponsor) => (
-        <a
-          href={sponsor.data.url}
-          class="p-3 shadow-md hover:shadow-lg duration-100 ease-in"
-        >
-          <img src={sponsor.data.image} alt={sponsor.data.name} />
-        </a>
-      ))
-    }
-  </div>
-  <h2 class="text-3xl mb-10 font-medium">Platinum</h2>
-  <div
-    class="grid lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-2 grid-flow-row gap-4 mb-10"
-  >
-    {
-      mainSponsors.map((sponsor) => (
-        <a
-          href={sponsor.data.url}
-          class="p-3 shadow-md hover:shadow-lg duration-100 ease-in"
-        >
-          <img src={sponsor.data.image} alt={sponsor.data.name} />
-        </a>
-      ))
-    }
-  </div>
-  <h2 class="text-3xl mb-10 font-medium">Gold</h2>
-  <div
-    class="grid lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-2 grid-flow-row gap-4 mb-10"
-  >
-    {
-      mainSponsors.map((sponsor) => (
-        <a
-          href={sponsor.data.url}
-          class="p-3 shadow-md hover:shadow-lg duration-100 ease-in"
-        >
-          <img src={sponsor.data.image} alt={sponsor.data.name} />
-        </a>
-      ))
-    }
-  </div>
-  <h2 class="text-3xl mb-10 font-medium">Silver</h2>
-  <div
-    class="grid lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-2 grid-flow-row gap-4 mb-10"
-  >
-    {
-      silverSponsors.map((sponsor) => (
+      sponsors.map((sponsor) => (
         <a
           href={sponsor.data.url}
           class="p-3 shadow-md hover:shadow-lg duration-100 ease-in"

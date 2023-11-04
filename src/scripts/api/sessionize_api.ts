@@ -74,7 +74,7 @@ export interface Speaker {
 
 // GLOBAL VARS
 
-const API_ID = "z7fbqjiv"
+const API_ID = "vfsf0scu"
 const API_ENDPOINT = `https://sessionize.com/api/v2/${API_ID}`;
 
 async function SessionizeGET(method: string): Promise<any> {
@@ -120,7 +120,7 @@ function parseSession(sessionRaw: any, speakers: Speaker[] | null): SessionInfo 
         .replaceAll(' ', '-')
         .replaceAll(/[.'/":*+?^${}()|[\]\\,“”!]/g, '')
         .replaceAll(/-{2,}/g, '-');
-    console.log(sessionSlug);
+        
     const session: SessionInfo = {
         id: sessionRaw.id,
         slug: sessionSlug,

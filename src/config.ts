@@ -8,6 +8,14 @@ export class WebsiteConfig {
     public static readonly DEVFEST_LOGO_DARK: string = '/assets/images/logo_dark.png';
 
     /*--------------------------------------------
+    |              EVENT INFO                    |  
+    --------------------------------------------*/
+
+    public static readonly EVENT_START : Date = new Date('2023-12-02');
+    public static readonly EVENT_END : Date = new Date('2023-12-02');
+    public static readonly EVENT_LOCATION : String = 'Polythecnic of Bari';
+    
+    /*--------------------------------------------
     |              SOCIAL SHARE                  |  
     --------------------------------------------*/
 

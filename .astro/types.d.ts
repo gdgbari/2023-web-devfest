@@ -199,37 +199,16 @@ declare module 'astro:content' {
 
 	type ContentEntryMap = {
 		"externals": {
+"ass_coach.md": {
+	id: "ass_coach.md";
+  slug: "ass_coach";
+  body: string;
+  collection: "externals";
+  data: InferEntrySchema<"externals">
+} & { render(): Render[".md"] };
 "google.md": {
 	id: "google.md";
   slug: "google";
-  body: string;
-  collection: "externals";
-  data: InferEntrySchema<"externals">
-} & { render(): Render[".md"] };
-"google_gold.md": {
-	id: "google_gold.md";
-  slug: "google_gold";
-  body: string;
-  collection: "externals";
-  data: InferEntrySchema<"externals">
-} & { render(): Render[".md"] };
-"google_partner.md": {
-	id: "google_partner.md";
-  slug: "google_partner";
-  body: string;
-  collection: "externals";
-  data: InferEntrySchema<"externals">
-} & { render(): Render[".md"] };
-"google_platinum.md": {
-	id: "google_platinum.md";
-  slug: "google_platinum";
-  body: string;
-  collection: "externals";
-  data: InferEntrySchema<"externals">
-} & { render(): Render[".md"] };
-"google_silver.md": {
-	id: "google_silver.md";
-  slug: "google_silver";
   body: string;
   collection: "externals";
   data: InferEntrySchema<"externals">
@@ -296,30 +275,44 @@ declare module 'astro:content' {
 } & { render(): Render[".md"] };
 };
 "staff": {
-"armando.md": {
-	id: "armando.md";
-  slug: "armando";
+"anna.md": {
+	id: "anna.md";
+  slug: "anna";
   body: string;
   collection: "staff";
   data: InferEntrySchema<"staff">
 } & { render(): Render[".md"] };
-"giacomo.md": {
-	id: "giacomo.md";
-  slug: "giacomo";
+"laura.md": {
+	id: "laura.md";
+  slug: "laura";
   body: string;
   collection: "staff";
   data: InferEntrySchema<"staff">
 } & { render(): Render[".md"] };
-"giancarlo.md": {
-	id: "giancarlo.md";
-  slug: "giancarlo";
+"michela.md": {
+	id: "michela.md";
+  slug: "michela";
   body: string;
   collection: "staff";
   data: InferEntrySchema<"staff">
 } & { render(): Render[".md"] };
-"simone_bonfrate.md": {
-	id: "simone_bonfrate.md";
-  slug: "simone_bonfrate";
+"mike.md": {
+	id: "mike.md";
+  slug: "mike";
+  body: string;
+  collection: "staff";
+  data: InferEntrySchema<"staff">
+} & { render(): Render[".md"] };
+"paolo.md": {
+	id: "paolo.md";
+  slug: "paolo";
+  body: string;
+  collection: "staff";
+  data: InferEntrySchema<"staff">
+} & { render(): Render[".md"] };
+"simone.md": {
+	id: "simone.md";
+  slug: "simone";
   body: string;
   collection: "staff";
   data: InferEntrySchema<"staff">

@@ -12,11 +12,11 @@ const { transparentMode = false } = Astro.props;
 const initialClasses = transparentMode ? "bg-trasparent" : "bg-white shadow-md";
 
 const links = [
-  { link: "/schedule", name: "Schedule" },
+  //{ link: "/schedule", name: "Schedule" },
   { link: "/sessions", name: "Sessions" },
   { link: "/speakers", name: "Speakers" },
-  { link: "/location", name: "Location" },
-  { link: "/faq", name: "Faq" },
+  //{ link: "/location", name: "Location" },
+  //{ link: "/faq", name: "Faq" },
   { link: "/staff", name: "Staff" },
 ];
 ---
@@ -181,31 +181,31 @@ const links = [
     navMobileMenu?.addEventListener("click", closeMenu);
 
     function openMenu() {
-      navMobileMenu.classList.remove("pointer-events-none");
+      navMobileMenu?.classList.remove("pointer-events-none");
 
       setTimeout(() => {
-        navMobileMenu.classList.remove("bg-black/0");
-        navMobileMenu.classList.add("bg-black/30");
+        navMobileMenu?.classList.remove("bg-black/0");
+        navMobileMenu?.classList.add("bg-black/30");
 
-        navMobileMenuContainer.classList.remove("left-[-16rem]");
-        navMobileMenuContainer.classList.add("left-0");
+        navMobileMenuContainer?.classList.remove("left-[-16rem]");
+        navMobileMenuContainer?.classList.add("left-0");
       }, 50);
     }
 
     function closeMenu() {
-      navMobileMenu.classList.remove("bg-black/30");
-      navMobileMenu.classList.add("bg-black/0");
+      navMobileMenu?.classList.remove("bg-black/30");
+      navMobileMenu?.classList.add("bg-black/0");
 
-      navMobileMenuContainer.classList.remove("left-0");
-      navMobileMenuContainer.classList.add("left-[-16rem]");
+      navMobileMenuContainer?.classList.remove("left-0");
+      navMobileMenuContainer?.classList.add("left-[-16rem]");
 
       setTimeout(() => {
-        navMobileMenu.classList.add("pointer-events-none");
+        navMobileMenu?.classList.add("pointer-events-none");
       }, 110);
     }
 
     w.resetNavbar = () => {
-      navLogo.setAttribute("src", DEVFEST_LOGO_DARK);
+      navLogo?.setAttribute("src", DEVFEST_LOGO_DARK);
       window.removeEventListener("scroll", checkNav);
     };
 
@@ -223,10 +223,10 @@ const links = [
 
     function checkNav() {
       if (window.scrollY > 100) {
-        navLogo.setAttribute("src", DEVFEST_LOGO_DARK);
+        navLogo?.setAttribute("src", DEVFEST_LOGO_DARK);
         w.navSetWhiteBg();
       } else {
-        navLogo.setAttribute("src", DEVFEST_LOGO_LIGHT);
+        navLogo?.setAttribute("src", DEVFEST_LOGO_LIGHT);
         nav?.classList.add("bg-trasparent");
         navLinks?.classList.add("text-white");
 

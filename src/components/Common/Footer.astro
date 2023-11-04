@@ -10,13 +10,13 @@ const year = new Date().getFullYear();
     <div class="flex md:flex-row flex-col md:gap-24 gap-4 justify-between">
       <div class="flex gap-4 items-center">
         <span class="text-lg font-medium">Share</span>
-        <button class="share" share-type="Facebook">
+        <button class="share" data-share-type="Facebook">
           <img class="w-6" src="/assets/vectors/facebook_logo.svg" />
         </button>
-        <button class="share" share-type="Telegram">
+        <button class="share" data-share-type="Telegram">
           <img class="w-6" src="/assets/vectors/telegram_logo.svg" />
         </button>
-        <button class="share" share-type="Twitter">
+        <button class="share" data-share-type="Twitter">
           <img class="w-6" src="/assets/vectors/twitter_logo.svg" />
         </button>
       </div>
@@ -56,7 +56,7 @@ const year = new Date().getFullYear();
 
         {
           WebsiteConfig.LINKEDIN_PAGE.length > 0 && (
-            <a href={WebsiteConfig.MEETUP_PAGE} target="_blank" rel="noopener">
+            <a href={WebsiteConfig.LINKEDIN_PAGE} target="_blank" rel="noopener">
               <img class="w-6" src="/assets/vectors/linkedin_logo.svg" />
             </a>
           )
@@ -75,12 +75,9 @@ const year = new Date().getFullYear();
 
     <div class="flex justify-between">
       <div class="flex flex-col gap-1">
-        <p class="mb-2 text-lg font-medium">About</p>
-        <a href="https://developers.google.com/groups/">GDG</a>
-        <a href="https://devfest.withgoogle.com/">Devfest</a>
-        <a href="https://developersonair.withgoogle.com/code-of-conduct"
-          >Code of Conduct</a
-        >
+        <p class="mb-2 text-lg font-medium">Resources</p>
+        <a href="https://developers.google.com/groups/">Media Kit</a>
+        <a href="https://devfest.withgoogle.com/">Sponsorship Proposal</a>
       </div>
       <div class="flex flex-col gap-1">
         <p class="mb-2 text-lg font-medium">About</p>
@@ -104,38 +101,4 @@ const year = new Date().getFullYear();
 <ReloadPrompt />
 
 <script src="/src/scripts/swup.ts"></script>
-<script>
-  import { WebsiteConfig } from "../../config";
-
-  document
-    .querySelectorAll("button.share")
-    .forEach((btn) => btn.addEventListener("click", shareWebsite));
-
-  function shareWebsite(e: Event) {
-    e.preventDefault();
-    const element = e.target as HTMLElement;
-    const attr = element.getAttribute("share-type");
-
-    const websiteUrl = encodeURIComponent(window.location.origin);
-    const fullTweet = WebsiteConfig.TWITTER_SOCIAL_TEXT.replace(
-      "{url}",
-      websiteUrl
-    );
-
-    switch (attr) {
-      case "Facebook":
-        window.open(
-          `https://www.facebook.com/sharer/sharer.php?u=${websiteUrl}`
-        );
-        break;
-      case "Twitter":
-        window.open(`https://twitter.com/intent/tweet?text=${fullTweet}`);
-        break;
-      case "Telegram":
-        window.open(
-          `https://t.me/share/url?url=${websiteUrl}&text=${WebsiteConfig.TELEGRAM_MESSAGE_TEXT}`
-        );
-        break;
-    }
-  }
-</script>
+<script src="/src/scripts/share_button.ts"></script>
