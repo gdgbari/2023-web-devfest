@@ -49,10 +49,19 @@ function formatDate(date: Date) {
     hours > 9 ? hours : "0" + hours
   }${minutes > 9 ? minutes : "0" + minutes}00Z`;
 }
+
+const pageTitle = entry.title;
+const pageDesc = entry.description;
 ---
 
-<BaseLayout pageTitle="Sessions">
-  <div class="flex md:flex-row flex-col justify-between md:items-center items-start  gap-2 mb-6 cursor-pointer">
+<BaseLayout
+  pageUiTitle="Session"
+  pageTitle={pageTitle}
+  pageDescription={pageDesc}
+>
+  <div
+    class="flex md:flex-row flex-col justify-between md:items-center items-start gap-2 mb-6 cursor-pointer"
+  >
     <h2 class="text-4xl mb-3">{entry.title}</h2>
     <div
       class="add-to-calendar m-y py-2 px-4 rounded-r-sm hover:bg-amber-400/20 border border-amber-600 text-amber-600 ease-in duration-100 text-center"
@@ -86,7 +95,7 @@ function formatDate(date: Date) {
   </div>
 
   <p>{entry.description}</p>
-  
+
   <div class="mt-10">
     <p class="text-3xl mb-6">Speakers</p>
 
@@ -113,7 +122,7 @@ function formatDate(date: Date) {
   const pageUrl = window.location.href;
 
   const addToCalendar = document.querySelector(".add-to-calendar");
-  
+
   addToCalendar?.addEventListener("click", () => {
     const timeStart = addToCalendar.getAttribute("time-start");
     const timeEnd = addToCalendar.getAttribute("time-end");

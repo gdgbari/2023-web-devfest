@@ -6,7 +6,7 @@ import { getSchedule } from "../scripts/api/sessionize_api";
 const schedule = await getSchedule();
 ---
 
-<BaseLayout pageTitle="Schedule">
+<BaseLayout pageUiTitle="Schedule">
   {
     schedule.map((s) => {
       const totalRooms = s.rooms.length;

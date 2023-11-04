@@ -8,16 +8,19 @@ import PageTitle from "./PageTitle.astro";
 
 interface Props {
   pageTitle: string;
+  pageUiTitle?: string;
+  pageDescription?: string;
   navbarTrasparent?: boolean;
 }
 
-const { pageTitle, navbarTrasparent } = Astro.props;
+const { pageTitle, pageUiTitle, pageDescription, navbarTrasparent } =
+  Astro.props;
 ---
 
 <!-- Below is your "component template." It's just HTML, but with
      some magic sprinkled in to help you build great templates. -->
 <html lang="it" class="scroll-smooth flex flex-col min-h-screen">
-  <PageHead />
+  <PageHead title={pageTitle} description={pageDescription} />
 
   <body class="flex-1 flex flex-col">
     <Navbar transparentMode={navbarTrasparent} />
@@ -27,7 +30,7 @@ const { pageTitle, navbarTrasparent } = Astro.props;
       class="main-content transition-fade flex flex-col items-stretch max-w-6xl lg:w-4/5 w-full m-auto px-4 pb-12 flex-1"
       data-swup="0"
     >
-      <PageTitle title={pageTitle} />
+      <PageTitle title={pageUiTitle ?? pageTitle} />
 
       <slot />
     </main>
