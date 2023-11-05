@@ -11,12 +11,12 @@ import { WebsiteConfig } from "../../config";
       class="md:absolute md:flex-none bottom-8 left-4 md:w-72 p-6 bg-amber-400 text-white"
     >
       <p class="text-3xl mb-3">The venue</p>
-      <p class="mb-3">{WebsiteConfig.EVENT_LOCATION}</p>
+      <p class="mb-3">{WebsiteConfig.EVENT_LOCATION_NAME}</p>
       <p>
         Located on the Bari University campus, it is known for its innovative and industry-oriented research.
       </p>
       <div class="flex flex-row mt-4 items-center">
-        <div class="flex-1">Via Edoardo Orabona, 4, 70126 Bari</div>
+        <div class="flex-1">{WebsiteConfig.EVENT_LOCATION_FULL_ADDRESS}</div>
         <a
           class="flex-none ml-3 p-2 bg-white/25 hover:bg-white/40 ease-in duration-100 rounded-full"
           role="button"
