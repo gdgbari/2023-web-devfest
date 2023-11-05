@@ -1,76 +1,31 @@
 ---
+import { SpeakerLinks } from '../../scripts/api/sessionize_api';
+
 interface Props {
-  twitter?: string;
-  instagram?: string;
-  facebook?: string;
-  websites?: string[];
-  linkedin?: string;
-  github?: string;
+  links: SpeakerLinks;
 }
 
-const { twitter, instagram, facebook, websites, linkedin, github } =
-  Astro.props;
+const { links:{ websites, ...known_links} }:Props = Astro.props;
 ---
 
 <div class="flex flex-row items-center">
-  {
-    linkedin && (
-      <div
-        class="mr-3 cursor-pointer"
-        role="button"
-        speaker-href={linkedin}
-      >
-        <img class="w-6" src="/assets/vectors/linkedin_logo.svg" />
-      </div>
-    )
-  }
-  {
-    github && (
-      <div
-        class="mr-3 cursor-pointer"
-        role="button"
-        speaker-href={github}
-      >
-        <img class="w-6" src="/assets/vectors/github_logo.svg" />
-      </div>
-    )
-  }
-  {
-    facebook && (
-      <div
-        class="mr-3 cursor-pointer"
-        role="button"
-        speaker-href={facebook}
-      >
-        <img class="w-6" src="/assets/vectors/facebook_logo.svg" />
-      </div>
-    )
-  }
-  {
-    instagram && (
-      <div
-        class="mr-3 cursor-pointer"
-        role="button"
-        speaker-href={instagram}
-      >
-        <img class="w-6" src="/assets/vectors/instagram_logo.svg" />
-      </div>
-    )
-  }
-  {
-    twitter && (
-      <div
-        class="mr-3 cursor-pointer"
-        role="button"
-        speaker-href={twitter}
-      >
-        <img class="w-6" src="/assets/vectors/twitter_logo.svg" />
-      </div>
-    )
-  }
+  {Object.keys(known_links).map(k => {
+    const link = known_links[k];
+    if (link) {
+      return (
+        <div
+          class="mr-3 cursor-pointer"
+          role="button"
+          speaker-href={link}
+        >
+          <img class="w-6" src={`/assets/vectors/${k}_logo.svg`} /> {/*TODO custom logo for companyWebsite*/}
+        </div>
+      );
+    }
+  })}
   {
     websites &&
-      websites.map((website) => (
+      websites.map((website:string) => (
         <div
           class="mr-3 cursor-pointer"
           speaker-href={website}
