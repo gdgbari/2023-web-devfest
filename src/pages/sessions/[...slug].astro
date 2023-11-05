@@ -36,8 +36,6 @@ const end = dateEnd.toLocaleTimeString("en-US", {
   minute: "numeric",
 });
 
-var speaker = entry.speakers![0];
-
 function formatDate(date: Date) {
   const year = date.getUTCFullYear();
   const month = date.getUTCMonth() + 1;
@@ -68,7 +66,7 @@ const pageDesc = entry.description;
       time-start={formatDate(dateStart)}
       time-end={formatDate(dateEnd)}
       session-details={encodeURIComponent(
-        `Speaker: ${speaker.fullName} \nTopics: ${entry.topics.join(" ")}`
+        `Speaker: ${entry.speakers.map(ele => ele.fullName).join(", ")} \nTopics: ${entry.topics.join(" ")}`
       )}
       session-title={entry.title}
       session-location={entry.room}
@@ -98,23 +96,24 @@ const pageDesc = entry.description;
 
   <div class="mt-10">
     <p class="text-3xl mb-6">Speakers</p>
-
-    <a
-      href={`/speakers/${speaker.slug}`}
-      class="flex md:flex-row flex-col items-center mb-6"
-    >
-      <div class="flex-none w-24 mb-2">
-        <img
-          src={speaker.profilePicture}
-          alt={speaker.fullName}
-          class="rounded-full"
-        />
-      </div>
-      <div class="flex-1 pl-6 flex flex-col md:items-start items-center">
-        <h2 class="text-4xl mb-1">{speaker.fullName}</h2>
-        <p class="text-lg mb-3">{speaker.tagLine}</p>
-      </div>
-    </a>
+    {entry.speakers.map((speaker) => (
+      <a
+        href={`/speakers/${speaker.slug}`}
+        class="flex md:flex-row flex-col items-center mb-6"
+      >
+        <div class="flex-none w-24 mb-2">
+          <img
+            src={speaker.profilePicture}
+            alt={speaker.fullName}
+            class="rounded-full"
+          />
+        </div>
+        <div class="flex-1 pl-6 flex flex-col md:items-start items-center">
+          <h2 class="text-4xl mb-1">{speaker.fullName}</h2>
+          <p class="text-lg mb-3">{speaker.tagLine}</p>
+        </div>
+      </a>
+    ))}
   </div>
 </BaseLayout>
 
