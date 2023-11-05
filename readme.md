@@ -27,5 +27,5 @@ npm run dev
 ## Build produciton version
 
 ```
-npm run buid
+npm run build
 ```
