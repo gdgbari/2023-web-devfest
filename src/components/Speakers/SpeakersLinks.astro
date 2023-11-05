@@ -6,15 +6,18 @@ interface Props {
 }
 
 const { links:{ websites, ...known_links} }:Props = Astro.props;
+
+
+
 ---
 
 <div class="flex flex-row items-center">
   {Object.keys(known_links).map(k => {
     const link = known_links[k];
-    if (link) {
+    if (link && typeof link === 'string') {
       return (
         <div
-          class="mr-3 cursor-pointer"
+          class="p-1 mr-2 cursor-pointer hover:opacity-75 transition-opacity"
           role="button"
           speaker-href={link}
         >
@@ -27,7 +30,7 @@ const { links:{ websites, ...known_links} }:Props = Astro.props;
     websites &&
       websites.map((website:string) => (
         <div
-          class="mr-3 cursor-pointer"
+          class="p-1 mr-2 cursor-pointer hover:opacity-75 transition-opacity"
           speaker-href={website}
           role="button"
         >
