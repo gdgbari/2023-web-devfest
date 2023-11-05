@@ -206,6 +206,7 @@ function parseSpeaker(speakerRaw: any, sessions: SessionInfo[] | null) {
                     break;
                 case 'instagram':
                     speaker.instagram = link.url;
+                    break;
                 case 'company_website':
                 case 'blog':
                 default:
