@@ -18,7 +18,7 @@ export async function getStaticPaths() {
 }
 
 // 2. When it's time to render, you can get the speaker directly from the prop
-const { speaker } = Astro.props;
+const { speaker }:Props = Astro.props;
 const pageTitle = `${speaker.fullName} @ Devfest Bari 2023`;
 ---
 
@@ -48,14 +48,7 @@ const pageTitle = `${speaker.fullName} @ Devfest Bari 2023`;
           )
         } -->
         <div class="py-2"></div>
-        <SpeakersLinks
-          linkedin={speaker.linkedin}
-          twitter={speaker.twitter}
-          github={speaker.github}
-          websites={speaker.websites}
-          facebook={speaker.facebook}
-          instagram={speaker.instagram}
-        />
+        <SpeakersLinks links={speaker.links} />
       </div>
     </div>
     <p>{speaker.bio}</p>

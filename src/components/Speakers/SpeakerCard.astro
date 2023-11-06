@@ -6,12 +6,10 @@ interface Props {
   speaker: Speaker;
 }
 
-const { speaker } = Astro.props;
+const { speaker }:Props = Astro.props;
 
 const words = speaker.bio ? speaker.bio.split(" ") : [];
 let body = words.slice(0, 20).join(" ");
-
-const { twitter, instagram, facebook, websites, linkedin, github } = speaker;
 
 if (words.length > 15) {
   body += "...";
@@ -33,13 +31,6 @@ if (words.length > 15) {
   <p class="text-sm mb-2">{body}</p>
 
   <div class="mt-auto">
-    <SpeakersLinks
-      linkedin={linkedin}
-      twitter={twitter}
-      github={github}
-      websites={websites}
-      facebook={facebook}
-      instagram={instagram}
-    />
+    <SpeakersLinks links={speaker.links} />
   </div>
 </a>
