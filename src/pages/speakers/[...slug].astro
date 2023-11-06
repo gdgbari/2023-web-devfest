@@ -18,7 +18,7 @@ export async function getStaticPaths() {
 }
 
 // 2. When it's time to render, you can get the speaker directly from the prop
-const { speaker }:Props = Astro.props;
+const { speaker }: Props = Astro.props;
 const pageTitle = `${speaker.fullName} @ Devfest Bari 2023`;
 ---
 
@@ -68,13 +68,15 @@ const pageTitle = `${speaker.fullName} @ Devfest Bari 2023`;
               });
               const startTime = formatTime(dateStart);
               const endTime = formatTime(dateEnd);
-
+              const isScheduled = dateStart.getTime() > 0;
               return (
                 <a class="flex flex-col" href={`/sessions/${session.slug}`}>
                   <p class="text-xl font-medium"> {session.title}</p>
-                  <p>
-                    {date}, {startTime} - {endTime}
-                  </p>
+                  {isScheduled && (
+                    <p>
+                      {date}, {startTime} - {endTime}
+                    </p>
+                  )}
                   <p>{session.room}</p>
                   <div class="flex gap-3 mt-3">
                     {session.topics.map((t) => (
