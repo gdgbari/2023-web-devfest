@@ -1,3 +1,6 @@
 node_modules/
 dist/
 .vscode/
+.firebaserc
+firebase.json
+.firebase/hosting.ZGlzdA.cache
