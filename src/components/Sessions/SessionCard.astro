@@ -1,5 +1,6 @@
 ---
 import { SessionInfo } from "../../scripts/api/sessionize_api";
+import SessionTopic from "./SessionTopic.astro";
 
 interface Props {
   session: SessionInfo;
@@ -13,7 +14,6 @@ const dateEnd = new Date(session.endsAt);
 
 const duration = dateEnd.getTime() - dateStart.getTime();
 const durationMinutes = duration / 60000;
-
 ---
 
 <a
@@ -28,28 +28,30 @@ const durationMinutes = duration / 60000;
       <span class="text-sm">{session.sessionLevel}</span>
     </div>
 
-    {
-      session.topics.map((t) => (
-        <div class="py-1 px-2 rounded-md bg-gray-200 text-gray-800">
-          <span class="text-sm">{t}</span>
-        </div>
-      ))
-    }
+    {session.topics.map((t) => <SessionTopic topic={t} />)}
   </div>
   <div class="flex mt-auto">
     <div class="flex-flex-col gap-2">
-      <div class="flex gap-3 items-center">
-        <div class="w-4">
-          <img src="/assets/vectors/pin.svg" alt="session duration" />
-        </div>
-        <div>{session.room}</div>
-      </div>
-      <div class="flex gap-3 items-center">
-        <div class="w-4">
-          <img src="/assets/vectors/time.svg" alt="session duration" />
-        </div>
-        <div>{durationMinutes} mins</div>
-      </div>
+      {
+        session.room && (
+          <div class="flex gap-3 items-center">
+            <div class="w-4">
+              <img src="/assets/vectors/pin.svg" alt="session duration" />
+            </div>
+            <div>{session.room ?? "To be announced"}</div>
+          </div>
+        )
+      }
+      {
+        durationMinutes > 0 && (
+          <div class="flex gap-3 items-center">
+            <div class="w-4">
+              <img src="/assets/vectors/time.svg" alt="session duration" />
+            </div>
+            <div>{durationMinutes} mins</div>
+          </div>
+        )
+      }
     </div>
   </div>
   {
@@ -71,7 +73,7 @@ const durationMinutes = duration / 60000;
               </div>
             </div>
           ))}
-      </div>
+        </div>
       </>
     )
   }

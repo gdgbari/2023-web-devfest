@@ -1,18 +1,20 @@
 ---
 import { CollectionEntry } from "astro:content";
 import SpeakersLinks from "../Speakers/SpeakersLinks.astro";
+import { Speaker, SpeakerLinks } from "../../scripts/api/sessionize_api";
+
 interface Props {
   value: CollectionEntry<"staff">;
 }
 
-const { value } = Astro.props;
+const { value }:Props = Astro.props;
 ---
 
 <div class="flex flex-row">
   <div class="flex-none w-32 pr-3">
     <img
       class="rounded-full"
-      src={`/assets/images/speakers/${value.data.image}`}
+      src={`/assets/images/staff/${value.data.image}`}
       alt={value.data.name}
     />
   </div>
@@ -21,12 +23,7 @@ const { value } = Astro.props;
     <p>{value.data.tagline}</p>
     <div class="my-2"></div>
     <SpeakersLinks
-      linkedin={value.data.linkedin}
-      twitter={value.data.twitter}
-      github={value.data.github}
-      websites={value.data.websites}
-      facebook={value.data.facebook}
-      instagram={value.data.instagram}
+      links={value.data.links as SpeakerLinks}
     />
   </div>
 </div>

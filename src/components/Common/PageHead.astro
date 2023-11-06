@@ -5,19 +5,21 @@ import { WebsiteConfig } from "../../config";
 const { DEVFEST_NAME } = WebsiteConfig;
 
 interface Props {
+  title?: string;
   description?: string;
   keywords?: string;
   author?: string;
 }
 
 const {
-  description = "Sviluppatore mobile e XR",
-  keywords = "mobile, app, ar, vr, hololens, flutter",
-  author = "Simone Bonfrate",
+  title,
+  description = "Conference hosted by Google Developer Groups (GDG) ",
+  keywords = "android, mobile, flutter, ai, conference, developer, machine learning, web, back-end, front-end, soft skills",
+  author = "Google Developer Group Bari",
 } = Astro.props;
 ---
 
-<title>{DEVFEST_NAME}</title>
+<title>  {title ?? DEVFEST_NAME}</title>
 
 <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
 <meta charset="UTF-8" />
@@ -32,5 +34,9 @@ const {
 <link rel="mask-icon" href="/favicon.svg" color="#FFFFFF" />
 <meta name="msapplication-TileColor" content="#FFFFFF" />
 <meta name="theme-color" content="#ffffff" />
-<meta name="description" content={DEVFEST_NAME} />
+
+<meta property="og:title" content={title ?? DEVFEST_NAME}>
+<meta property="og:description" content={description}>
+<meta property="og:image" content="/assets/images/social_thumb.png">
+
 { pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} /> }

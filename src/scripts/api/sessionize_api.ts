@@ -54,6 +54,16 @@ export interface SessionInfo {
     language: string,
 }
 
+export interface SpeakerLinks {
+    linkedin?: string,
+    twitter?: string,
+    github?: string,
+    company?: string,
+    websites: string[],
+    facebook?: string,
+    instagram?: string
+}
+
 export interface Speaker {
     id: string,
     slug: string,
@@ -64,17 +74,12 @@ export interface Speaker {
     tagLine: string,
     sessions?: SessionInfo[],
     profilePicture: string,
-    linkedin?: string,
-    twitter?: string,
-    github?: string,
-    websites?: string[],
-    facebook?: string,
-    instagram?: string
+    links: SpeakerLinks,
 }
 
 // GLOBAL VARS
 
-const API_ID = "z7fbqjiv"
+const API_ID = "vfsf0scu"
 const API_ENDPOINT = `https://sessionize.com/api/v2/${API_ID}`;
 
 async function SessionizeGET(method: string): Promise<any> {
@@ -120,7 +125,7 @@ function parseSession(sessionRaw: any, speakers: Speaker[] | null): SessionInfo 
         .replaceAll(' ', '-')
         .replaceAll(/[.'/":*+?^${}()|[\]\\,“”!]/g, '')
         .replaceAll(/-{2,}/g, '-');
-    console.log(sessionSlug);
+        
     const session: SessionInfo = {
         id: sessionRaw.id,
         slug: sessionSlug,
@@ -183,9 +188,8 @@ function parseSpeaker(speakerRaw: any, sessions: SessionInfo[] | null) {
         bio: speakerRaw.bio,
         tagLine: speakerRaw.tagLine,
         profilePicture: speakerRaw.profilePicture,
+        links: { websites: [] }
     };
-
-    speaker.websites = [];
 
     if (speakerRaw.links) {
         (speakerRaw.links as any[]).forEach(link => {
@@ -193,23 +197,26 @@ function parseSpeaker(speakerRaw: any, sessions: SessionInfo[] | null) {
 
             switch (linkType) {
                 case 'linkedin':
-                    speaker.linkedin = link.url;
+                    speaker.links.linkedin = link.url;
                     break;
                 case 'twitter':
-                    speaker.twitter = link.url;
+                    speaker.links.twitter = link.url;
                     break;
                 case 'github':
-                    speaker.github = link.url;
+                    speaker.links.github = link.url;
                     break;
                 case 'facebook':
-                    speaker.facebook = link.url;
+                    speaker.links.facebook = link.url;
                     break;
                 case 'instagram':
-                    speaker.instagram = link.url;
+                    speaker.links.instagram = link.url;
+                    break;
                 case 'company_website':
+                    speaker.links.company = link.url;
+                    break;
                 case 'blog':
                 default:
-                    speaker.websites!.push(link.url);
+                    speaker.links.websites.push(link.url);
                     break;
 
 

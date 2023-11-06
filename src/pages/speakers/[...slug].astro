@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../components/Common/BaseLayout.astro";
+import SessionTopic from "../../components/Sessions/SessionTopic.astro";
 import SpeakersLinks from "../../components/Speakers/SpeakersLinks.astro";
 import { Speaker, getSpeakers } from "../../scripts/api/sessionize_api";
 import { formatTime } from "../../scripts/time_utils";
@@ -18,10 +19,15 @@ export async function getStaticPaths() {
 }
 
 // 2. When it's time to render, you can get the speaker directly from the prop
-const { speaker } = Astro.props;
+const { speaker }: Props = Astro.props;
+const pageTitle = `${speaker.fullName} @ Devfest Bari 2023`;
 ---
 
-<BaseLayout pageTitle="Schedule">
+<BaseLayout
+  pageTitle={pageTitle}
+  pageUiTitle="Speaker"
+  pageDescription={speaker.bio}
+>
   <div class="flex flex-col">
     <div class="flex md:flex-row flex-col items-center mb-10">
       <div class="flex-none w-40 mb-2">
@@ -43,14 +49,7 @@ const { speaker } = Astro.props;
           )
         } -->
         <div class="py-2"></div>
-        <SpeakersLinks
-          linkedin={speaker.linkedin}
-          twitter={speaker.twitter}
-          github={speaker.github}
-          websites={speaker.websites}
-          facebook={speaker.facebook}
-          instagram={speaker.instagram}
-        />
+        <SpeakersLinks links={speaker.links} />
       </div>
     </div>
     <p>{speaker.bio}</p>
@@ -70,19 +69,19 @@ const { speaker } = Astro.props;
               });
               const startTime = formatTime(dateStart);
               const endTime = formatTime(dateEnd);
-
+              const isScheduled = dateStart.getTime() > 0;
               return (
                 <a class="flex flex-col" href={`/sessions/${session.slug}`}>
                   <p class="text-xl font-medium"> {session.title}</p>
-                  <p>
-                    {date}, {startTime} - {endTime}
-                  </p>
+                  {isScheduled && (
+                    <p>
+                      {date}, {startTime} - {endTime}
+                    </p>
+                  )}
                   <p>{session.room}</p>
                   <div class="flex gap-3 mt-3">
                     {session.topics.map((t) => (
-                      <div class="py-1 px-2 rounded-md bg-gray-200 text-gray-800">
-                        <span class="text-sm">{t}</span>
-                      </div>
+                      <SessionTopic topic={t} />
                     ))}
                   </div>
                 </a>

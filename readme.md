@@ -1,4 +1,12 @@
 # Devfest Bari Astro Template
+Website developed using Astro and Tailwind CSS.
+
+The main elements of the project are:
+ - `src`:contains the source code of the site structured in several subfolders:
+    - `components`: Astro components used in the pages 
+    - `content`: collection of content that can be queried by the Astro api
+    - `pages`: pages of the web site
+ - `public`: contains all the support files for the site (styles, images,...)
 
 ### Prerequisites
 - Node.js - v16.12.0 or higher.
@@ -19,5 +27,5 @@ npm run dev
 ## Build produciton version
 
 ```
-npm run buid
+npm run build
 ```

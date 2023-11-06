@@ -2,6 +2,7 @@
 import { CollectionEntry, getCollection, getEntry } from "astro:content";
 import BaseLayout from "../../components/Common/BaseLayout.astro";
 import { SessionInfo, getSessions } from "../../scripts/api/sessionize_api";
+import SessionTopic from "../../components/Sessions/SessionTopic.astro";
 
 interface Props {
   entry: SessionInfo;
@@ -21,6 +22,8 @@ const { entry } = Astro.props;
 const dateStart = new Date(entry.startsAt);
 const dateEnd = new Date(entry.endsAt);
 
+const isScheduled = dateStart.getTime() != 0;
+
 var date = dateStart.toLocaleDateString("en-US", {
   day: "numeric",
   month: "short",
@@ -36,8 +39,6 @@ const end = dateEnd.toLocaleTimeString("en-US", {
   minute: "numeric",
 });
 
-var speaker = entry.speakers![0];
-
 function formatDate(date: Date) {
   const year = date.getUTCFullYear();
   const month = date.getUTCMonth() + 1;
@@ -49,63 +50,82 @@ function formatDate(date: Date) {
     hours > 9 ? hours : "0" + hours
   }${minutes > 9 ? minutes : "0" + minutes}00Z`;
 }
+
+const pageTitle = entry.title;
+const pageDesc = entry.description;
 ---
 
-<BaseLayout pageTitle="Sessions">
-  <div class="flex md:flex-row flex-col justify-between md:items-center items-start  gap-2 mb-6 cursor-pointer">
+<BaseLayout
+  pageUiTitle="Session"
+  pageTitle={pageTitle}
+  pageDescription={pageDesc}
+>
+  <div
+    class="flex md:flex-row flex-col justify-between md:items-center items-start gap-2 mb-6 cursor-pointer"
+  >
     <h2 class="text-4xl mb-3">{entry.title}</h2>
-    <div
-      class="add-to-calendar m-y py-2 px-4 rounded-r-sm hover:bg-amber-400/20 border border-amber-600 text-amber-600 ease-in duration-100 text-center"
-      time-start={formatDate(dateStart)}
-      time-end={formatDate(dateEnd)}
-      session-details={encodeURIComponent(
-        `Speaker: ${speaker.fullName} \nTopics: ${entry.topics.join(" ")}`
-      )}
-      session-title={entry.title}
-      session-location={entry.room}
-    >
-      Aggiungi al calendario
-    </div>
+
+    {
+      isScheduled && (
+        <div
+          class="add-to-calendar m-y py-2 px-4 rounded-r-sm hover:bg-amber-400/20 border border-amber-600 text-amber-600 ease-in duration-100 text-center"
+          time-start={formatDate(dateStart)}
+          time-end={formatDate(dateEnd)}
+          session-details={encodeURIComponent(
+            `Speaker: ${entry.speakers
+              .map((ele) => ele.fullName)
+              .join(", ")} \nTopics: ${entry.topics.join(" ")}`
+          )}
+          session-title={entry.title}
+          session-location={entry.room}
+        >
+          Aggiungi al calendario
+        </div>
+      )
+    }
   </div>
   <div class="flex flex-wrap gap-2 mb-6">
     <div class="py-1 px-2 rounded-md bg-green-600 text-white">
       <span class="text-sm">{entry.sessionLevel}</span>
     </div>
 
-    {
-      entry.topics.map((t) => (
-        <div class="py-1 px-2 rounded-md bg-gray-200 text-gray-800">
-          <span class="text-sm">{t}</span>
-        </div>
-      ))
-    }
+    {entry.topics.map((t) => <SessionTopic topic={t} />)}
   </div>
   <div class="mb-6">
     <p class="text-lg">{entry.room}</p>
-    <p class="text-lg">{date}, {start} - {end}</p>
+    {
+      isScheduled && (
+        <p class="text-lg">
+          {date}, {start} - {end}
+        </p>
+      )
+    }
   </div>
 
   <p>{entry.description}</p>
-  
+
   <div class="mt-10">
     <p class="text-3xl mb-6">Speakers</p>
-
-    <a
-      href={`/speakers/${speaker.slug}`}
-      class="flex md:flex-row flex-col items-center mb-6"
-    >
-      <div class="flex-none w-24 mb-2">
-        <img
-          src={speaker.profilePicture}
-          alt={speaker.fullName}
-          class="rounded-full"
-        />
-      </div>
-      <div class="flex-1 pl-6 flex flex-col md:items-start items-center">
-        <h2 class="text-4xl mb-1">{speaker.fullName}</h2>
-        <p class="text-lg mb-3">{speaker.tagLine}</p>
-      </div>
-    </a>
+    {
+      entry.speakers.map((speaker) => (
+        <a
+          href={`/speakers/${speaker.slug}`}
+          class="flex md:flex-row flex-col items-center mb-6"
+        >
+          <div class="flex-none w-24 mb-2">
+            <img
+              src={speaker.profilePicture}
+              alt={speaker.fullName}
+              class="rounded-full"
+            />
+          </div>
+          <div class="flex-1 pl-6 flex flex-col md:items-start items-center">
+            <h2 class="text-4xl mb-1">{speaker.fullName}</h2>
+            <p class="text-lg mb-3">{speaker.tagLine}</p>
+          </div>
+        </a>
+      ))
+    }
   </div>
 </BaseLayout>
 
@@ -113,7 +133,7 @@ function formatDate(date: Date) {
   const pageUrl = window.location.href;
 
   const addToCalendar = document.querySelector(".add-to-calendar");
-  
+
   addToCalendar?.addEventListener("click", () => {
     const timeStart = addToCalendar.getAttribute("time-start");
     const timeEnd = addToCalendar.getAttribute("time-end");

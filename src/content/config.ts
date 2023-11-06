@@ -1,5 +1,15 @@
 import { defineCollection, reference, z } from 'astro:content';
 
+const linksSchema = z.object({
+    twitter: z.string().optional(),
+    instagram: z.string().optional(),
+    facebook: z.string().optional(),
+    websites: z.array(z.string()).optional(),
+    linkedin: z.string().optional(),
+    github: z.string().optional(),
+    company: z.string().optional(),
+});
+
 const speakersCollection = defineCollection({
     type: 'content', // v2.5.0 and later
     schema: z.object({
@@ -9,12 +19,7 @@ const speakersCollection = defineCollection({
         location: z.string(),
         topics: z.array(z.string()),
         image: z.string(),
-        twitter: z.string().optional(),
-        instagram: z.string().optional(),
-        facebook: z.string().optional(),
-        websites: z.array(z.string()).optional(),
-        linkedin: z.string().optional(),
-        github: z.string().optional(),
+        links: linksSchema,
         sessions: z.array(reference('sessions')).optional(),
     }),
 });
@@ -51,12 +56,7 @@ const staffCollection = defineCollection({
         tagline: z.string(),
         role: z.enum(['organizer', 'collaborator']),
         image: z.string(),
-        twitter: z.string().optional(),
-        instagram: z.string().optional(),
-        facebook: z.string().optional(),
-        websites: z.array(z.string()).optional(),
-        linkedin: z.string().optional(),
-        github: z.string().optional(),
+        links: linksSchema
     }),
 });
 
