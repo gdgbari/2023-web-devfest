@@ -1,0 +1,45 @@
+---
+import BaseLayout from "../../../components/Common/BaseLayout.astro";
+import SessionCard from "../../../components/Sessions/SessionCard.astro";
+import { SessionInfo, getSessions } from "../../../scripts/api/sessionize_api";
+
+interface Props {
+    topic: string;
+    sessions: SessionInfo[];
+}
+
+export async function getStaticPaths() {
+    const sessions = await getSessions(true);
+
+    const topics = sessions.map((s) => s.topics).flat();
+    const topicSet = new Set(topics);
+
+    const topicSessions = Array.from(topicSet).map((topic) => {
+        const sessionsFound = sessions.filter((session) =>
+            session.topics.includes(topic)
+        );
+
+        return {
+            topic: topic,
+            sessions: sessionsFound,
+        };
+    });
+
+    return topicSessions.map((entry) => {
+        const topicEntry = entry.topic.replaceAll(" ", "-").toLocaleLowerCase();
+
+        return { params: { topic: topicEntry }, props: entry };
+    });
+}
+
+// 2. When it's time to render, you can get the entry directly from the prop
+const { topic, sessions } = Astro.props;
+---
+
+<BaseLayout pageTitle={`${topic} Sessions`}>
+    <div
+        class="grid lg:grid-cols-3 md:grid-cols-2 grid-flow-row gap-4 mt-5 mb-7"
+    >
+        {sessions.map((s) => <SessionCard session={s} />)}
+    </div>
+</BaseLayout>

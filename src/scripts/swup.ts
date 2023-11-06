@@ -1,5 +1,6 @@
 import Swup from 'swup';
-import { initCards as initSpeakerLinks } from './speaker_helper';
+import { initRoleLinkElement as initRoleLinkElements } from './links_helper';
+
 const w = window as any;
 const swup = new Swup({ cache: false });
 
@@ -12,10 +13,11 @@ const pageHandle = () => {
         w.navSetWhiteBg();
     }
 
-    if(swup.currentPageUrl.includes('speakers')) {
-        initSpeakerLinks();
-    }
+    initRoleLinkElements(swup);
 }
 
 swup.hooks.on('content:replace', pageHandle);
 swup.hooks.on('enable', pageHandle); //Needed for initial load (links won't work without this)
+
+initRoleLinkElements(swup);
+

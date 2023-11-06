@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../components/Common/BaseLayout.astro";
+import SessionTopic from "../../components/Sessions/SessionTopic.astro";
 import SpeakersLinks from "../../components/Speakers/SpeakersLinks.astro";
 import { Speaker, getSpeakers } from "../../scripts/api/sessionize_api";
 import { formatTime } from "../../scripts/time_utils";
@@ -80,9 +81,7 @@ const pageTitle = `${speaker.fullName} @ Devfest Bari 2023`;
                   <p>{session.room}</p>
                   <div class="flex gap-3 mt-3">
                     {session.topics.map((t) => (
-                      <div class="py-1 px-2 rounded-md bg-gray-200 text-gray-800">
-                        <span class="text-sm">{t}</span>
-                      </div>
+                      <SessionTopic topic={t} />
                     ))}
                   </div>
                 </a>

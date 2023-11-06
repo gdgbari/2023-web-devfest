@@ -2,6 +2,7 @@
 import { CollectionEntry, getCollection, getEntry } from "astro:content";
 import BaseLayout from "../../components/Common/BaseLayout.astro";
 import { SessionInfo, getSessions } from "../../scripts/api/sessionize_api";
+import SessionTopic from "../../components/Sessions/SessionTopic.astro";
 
 interface Props {
   entry: SessionInfo;
@@ -88,13 +89,7 @@ const pageDesc = entry.description;
       <span class="text-sm">{entry.sessionLevel}</span>
     </div>
 
-    {
-      entry.topics.map((t) => (
-        <div class="py-1 px-2 rounded-md bg-gray-200 text-gray-800">
-          <span class="text-sm">{t}</span>
-        </div>
-      ))
-    }
+    {entry.topics.map((t) => <SessionTopic topic={t} />)}
   </div>
   <div class="mb-6">
     <p class="text-lg">{entry.room}</p>

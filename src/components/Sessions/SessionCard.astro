@@ -1,5 +1,6 @@
 ---
 import { SessionInfo } from "../../scripts/api/sessionize_api";
+import SessionTopic from "./SessionTopic.astro";
 
 interface Props {
   session: SessionInfo;
@@ -27,13 +28,7 @@ const durationMinutes = duration / 60000;
       <span class="text-sm">{session.sessionLevel}</span>
     </div>
 
-    {
-      session.topics.map((t) => (
-        <div class="py-1 px-2 rounded-md bg-gray-200 text-gray-800">
-          <span class="text-sm">{t}</span>
-        </div>
-      ))
-    }
+    {session.topics.map((t) => <SessionTopic topic={t} />)}
   </div>
   <div class="flex mt-auto">
     <div class="flex-flex-col gap-2">

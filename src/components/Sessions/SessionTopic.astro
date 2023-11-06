@@ -1,0 +1,16 @@
+---
+interface Props {
+    topic: string;
+}
+
+const { topic } = Astro.props;
+const topicSlug = topic.replaceAll(" ", "-").toLocaleLowerCase();
+---
+
+<div
+    class="py-1 px-2 rounded-md bg-gray-200 text-gray-800 cursor-pointer"
+    role="link"
+    data-href={`/sessions/topics/${topicSlug}`}
+>
+    <span class="text-sm">{topic}</span>
+</div>

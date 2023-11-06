@@ -18,8 +18,8 @@ const { links:{ websites, ...known_links} }:Props = Astro.props;
       return (
         <div
           class="p-1 mr-2 cursor-pointer hover:opacity-75 transition-opacity"
-          role="button"
-          speaker-href={link}
+          role="link"
+          data-href={link}
         >
           <img class="w-6" src={`/assets/vectors/${k}_logo.svg`} /> {/*TODO custom logo for companyWebsite*/}
         </div>
