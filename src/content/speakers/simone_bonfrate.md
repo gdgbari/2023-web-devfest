@@ -6,11 +6,12 @@ location: "Grottaglie"
 topics: 
 - "Flutter"
 image: "simone_bonfrate.png"
-twitter: "https://twitter.com/bonfry_dev"
-instagram: "https://instagram.com/bonfry"
-facebook: "https://facebook.com/GDGBari"
-websites:
-- https://bonfry.com
+links:
+    twitter: "https://twitter.com/bonfry_dev"
+    instagram: "https://instagram.com/bonfry"
+    facebook: "https://facebook.com/GDGBari"
+    websites:
+        - https://bonfry.com
 ---
 
 Ciao! Sono Simone Bonfrate, sviluppatore appassionato di Flutter e realtà aumentata. Mi piace creare applicazioni mobili che siano sia utili che divertenti, e credo che la realtà aumentata sia un modo fantastico per farlo.
