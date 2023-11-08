@@ -16,9 +16,13 @@ const partners = external.filter((ext) => ext.data.type === "partner");
       sponsors.map((sponsor) => (
         <a
           href={sponsor.data.url}
-          class="p-3 shadow-md hover:shadow-lg duration-100 ease-in"
+          class="p-3 shadow-md hover:shadow-lg duration-100 ease-in h-28 flex items-center justify-center"
         >
-          <img src={sponsor.data.image} alt={sponsor.data.name} />
+          <img
+            class="max-h-full"
+            src={sponsor.data.image}
+            alt={sponsor.data.name}
+          />
         </a>
       ))
     }
@@ -31,9 +35,13 @@ const partners = external.filter((ext) => ext.data.type === "partner");
       partners.map((sponsor) => (
         <a
           href={sponsor.data.url}
-          class="p-3 shadow-md hover:shadow-lg duration-100 ease-in"
+          class="p-3 shadow-md hover:shadow-lg duration-100 ease-in h-28 flex items-center justify-center"
         >
-          <img src={sponsor.data.image} alt={sponsor.data.name} />
+          <img
+            class="max-h-full"
+            src={sponsor.data.image}
+            alt={sponsor.data.name}
+          />
         </a>
       ))
     }
