@@ -1,5 +1,6 @@
 ---
 import { WebsiteConfig } from "../../config";
+import LinkButton from "./LinkButton.astro";
 import ReloadPrompt from "./ReloadPrompt.astro";
 
 const year = new Date().getFullYear();
@@ -10,65 +11,33 @@ const year = new Date().getFullYear();
     <div class="flex md:flex-row flex-col md:gap-24 gap-4 justify-between">
       <div class="flex gap-4 items-center">
         <span class="text-lg font-medium">Share</span>
-        <button class="share" data-share-type="Facebook">
-          <img class="w-6" src="/assets/vectors/facebook_logo.svg" />
-        </button>
-        <button class="share" data-share-type="Telegram">
-          <img class="w-6" src="/assets/vectors/telegram_logo.svg" />
-        </button>
-        <button class="share" data-share-type="Twitter">
-          <img class="w-6" src="/assets/vectors/twitter_logo.svg" />
-        </button>
+        {
+          [
+            ["Facebook", "facebook"],
+            ["Telegram", "telegram"],
+            ["Twitter", "twitter"],
+          ].map(([type, logo]) => {
+            return (
+              <button class="share cursor-pointer hover:opacity-75 transition-opacity" data-share-type={type}>
+                <img class="w-6" src={`/assets/vectors/${logo}_logo.svg`} />
+              </button>
+            )
+          })
+        }
       </div>
       <div class="flex gap-4 items-center">
         <span class="text-lg font-medium">Follow Us</span>
-        {
-          WebsiteConfig.FACEBOOK_PAGE.length > 0 && (
-            <a
-              href={WebsiteConfig.FACEBOOK_PAGE}
-              target="_blank"
-              rel="noopener"
-            >
-              <img class="w-6" src="/assets/vectors/facebook_logo.svg" />
-            </a>
+        {[
+          [WebsiteConfig.FACEBOOK_PAGE, "facebook"],
+          [WebsiteConfig.INSTAGRAM_PAGE, "instagram"],
+          [WebsiteConfig.MEETUP_PAGE, "web"],
+          [WebsiteConfig.LINKEDIN_PAGE, "linkedin"],
+          [WebsiteConfig.WEBSITE, "web"],
+        ].map(([url, type]) => {
+          return url.length > 0 && (
+            <LinkButton href={url} logo={type} />
           )
-        }
-
-        {
-          WebsiteConfig.INSTAGRAM_PAGE.length > 0 && (
-            <a
-              href={WebsiteConfig.INSTAGRAM_PAGE}
-              target="_blank"
-              rel="noopener"
-            >
-              <img class="w-6" src="/assets/vectors/instagram_logo.svg" />
-            </a>
-          )
-        }
-
-        {
-          WebsiteConfig.MEETUP_PAGE.length > 0 && (
-            <a href={WebsiteConfig.MEETUP_PAGE} target="_blank" rel="noopener">
-              <img class="w-6" src="/assets/vectors/web_logo.svg" />
-            </a>
-          )
-        }
-
-        {
-          WebsiteConfig.LINKEDIN_PAGE.length > 0 && (
-            <a href={WebsiteConfig.LINKEDIN_PAGE} target="_blank" rel="noopener">
-              <img class="w-6" src="/assets/vectors/linkedin_logo.svg" />
-            </a>
-          )
-        }
-
-        {
-          WebsiteConfig.WEBSITE.length > 0 && (
-            <a href={WebsiteConfig.WEBSITE} target="_blank" rel="noopener">
-              <img class="w-6" src="/assets/vectors/web_logo.svg" />
-            </a>
-          )
-        }
+        })}
       </div>
     </div>
     <div class="border border-gray-700/50"></div>

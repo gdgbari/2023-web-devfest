@@ -1,0 +1,17 @@
+---
+interface Props {
+  href: string;
+  logo: string;
+}
+
+const { href, logo }:Props = Astro.props;
+---
+
+<a
+    href={href}
+    target="_blank"
+    rel="noopener"
+    class="cursor-pointer hover:opacity-75 transition-opacity"
+>
+    <img class="w-6" src={`/assets/vectors/${logo}_logo.svg`} />
+</a>
