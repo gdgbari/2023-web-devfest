@@ -192,6 +192,13 @@ declare module 'astro:content' {
   collection: "externals";
   data: InferEntrySchema<"externals">
 } & { render(): Render[".md"] };
+"aup copy.md": {
+	id: "aup copy.md";
+  slug: "aup-copy";
+  body: string;
+  collection: "externals";
+  data: InferEntrySchema<"externals">
+} & { render(): Render[".md"] };
 "aup.md": {
 	id: "aup.md";
   slug: "aup";
