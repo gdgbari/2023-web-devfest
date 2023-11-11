@@ -5,7 +5,7 @@ community: "GDG Bari"
 location: "Grottaglie"
 topics: 
 - "Flutter"
-image: "simone_bonfrate.png"
+image: "simone_bonfrate.webp"
 links:
     twitter: "https://twitter.com/bonfry_dev"
     instagram: "https://instagram.com/bonfry"

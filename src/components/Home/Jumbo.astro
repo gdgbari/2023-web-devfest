@@ -3,7 +3,7 @@ import { WebsiteConfig } from "../../config";
 ---
 
 <div class="text-white jumbo h-screen flex flex-col">
-  <img class="object-cover h-full" src="/assets/images/bari.jpg" alt="" />
+  <img class="object-cover h-full" src="/assets/images/bari.webp" alt="" />
   <div class="bg-amber-700/50 flex flex-col justify-center content-center absolute top-0 left-0 right-0 h-screen">
     <div class="p-10 text-center">
       <h1 class="text-6xl font-medium mb-4">Devfest Bari 2023</h1>
@@ -18,13 +18,10 @@ import { WebsiteConfig } from "../../config";
       </p>
       <p class="text-3xl">{WebsiteConfig.EVENT_LOCATION_NAME}</p>
       <div class="mt-8 flex gap-4 justify-center flex-col md:flex-row">
-        <a
-        class="mt-auto text-center p-3 bg-amber-500 hover:bg-amber-600 text-white ease-in duration-100"
-        href="https://discord.gg/fNdKEAZFCj" target="_blank">JOIN DISCORD GROUP</a
-      >
+       
       <a
-          class="mt-auto text-center p-3 bg-amber-500 hover:bg-amber-600 text-white ease-in duration-100"
-          href={WebsiteConfig.DEVFEST_EVENT_LINK}>SIGN UP</a
+          class="mt-auto text-center py-3 px-8 bg-amber-500 hover:bg-amber-600 text-white ease-in duration-100"
+          href={WebsiteConfig.DEVFEST_EVENT_LINK}>GET TICKET</a
         >
       </div>
     </div>
