@@ -6,15 +6,15 @@ import { WebsiteConfig } from "../../config";
 
 <div class="flex items-center justify-around px-10 bg-amber-500 text-white flex-col sm:flex-row">
     {[
-        ["participants", "community", WebsiteConfig.NUM_PARTECIPENTS],
-        ["speakers", "speakers", WebsiteConfig.NUM_SPEAKERS],
-        ["categories", "categories", WebsiteConfig.NUM_TALK_CATEGORIES],
-        ["tracks", "tracks", WebsiteConfig.NUM_TRACKS]
+        ["Participants", "community", WebsiteConfig.NUM_PARTECIPENTS],
+        ["Speakers", "speakers", WebsiteConfig.NUM_SPEAKERS],
+        ["Categories", "categories", WebsiteConfig.NUM_TALK_CATEGORIES],
+        ["Tracks", "tracks", WebsiteConfig.NUM_TRACKS]
     ].map( ([name, icon, num]:[string, string, number]) => {
         return <div class="flex text-xl items-center justify-center flex-col sm:py-20 py-10">
             <img src={`/assets/vectors/${icon}.svg`} class="text-white fill-current pb-10 sm:w-32 sm:h-32 w-44 h-44" />
             <h2 class="font-bold text-5xl">{num}</h2>
-            <span class="text-xl underline">{name.toUpperCase().slice(0, 1)+name.slice(1)}</span>
+            <span class="text-xl underline">{name}</span>
         </div>
     })}
 </div>
