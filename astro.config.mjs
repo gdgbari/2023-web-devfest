@@ -53,7 +53,6 @@ export default defineConfig({
       workbox: {
         navigateFallback: '/',
         globPatterns: ['**/*.{css,js,html,svg,png,ico,txt}'],
-        globIgnores: ["sw.js", "**/node_modules/**/*"],
       },
       devOptions: {
         enabled: true,
