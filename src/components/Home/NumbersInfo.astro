@@ -1,0 +1,16 @@
+---
+
+import { WebsiteConfig } from "../../config";
+
+---
+
+<div class="relative flex flex-col">
+    {WebsiteConfig.NUM_PARTECIPENTS}
+    <img class="w-6" width="10px" height="10px" src="/assets/vectors/speakers.svg" />
+    <img class="w-6" width="10px" height="10px" src="/assets/vectors/categories.svg" />
+    <img class="w-6" width="10px" height="10px" src="/assets/vectors/community.svg" />
+    <img class="w-6" width="10px" height="10px" src="/assets/vectors/tracks.svg" />
+    {WebsiteConfig.NUM_SPEAKERS}
+    {WebsiteConfig.NUM_TALK_CATEGORIES}
+    {WebsiteConfig.NUM_TRACKS}
+</div>
