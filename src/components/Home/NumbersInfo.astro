@@ -11,10 +11,10 @@ import { WebsiteConfig } from "../../config";
         ["categories", "categories", WebsiteConfig.NUM_TALK_CATEGORIES],
         ["tracks", "tracks", WebsiteConfig.NUM_TRACKS]
     ].map( ([name, icon, num]:[string, string, number]) => {
-        return <div class="flex text-xl items-center justify-center flex-col py-20">
-            <img width="100px" height="100px" src={`/assets/vectors/${icon}.svg`} class="text-white fill-current pb-10" />
-            <h2 class="font-bold text-6xl">{num}</h2>
-            <span class="text-2xl">{name.toUpperCase().slice(0, 1)+name.slice(1)}</span>
+        return <div class="flex text-xl items-center justify-center flex-col sm:py-20 py-10">
+            <img src={`/assets/vectors/${icon}.svg`} class="text-white fill-current pb-10 sm:w-32 sm:h-32 w-44 h-44" />
+            <h2 class="font-bold text-5xl">{num}</h2>
+            <span class="text-xl underline">{name.toUpperCase().slice(0, 1)+name.slice(1)}</span>
         </div>
     })}
 </div>
