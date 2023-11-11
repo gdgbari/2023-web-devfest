@@ -1,7 +1,6 @@
 ---
-import { CollectionEntry, getCollection, getEntry } from "astro:content";
 import BaseLayout from "../../components/Common/BaseLayout.astro";
-import { SessionInfo, getSessions } from "../../scripts/api/sessionize_api";
+import { type SessionInfo, getSessions } from "../../scripts/api/sessionize_api";
 import SessionTopic from "../../components/Sessions/SessionTopic.astro";
 
 interface Props {
@@ -72,9 +71,7 @@ const pageDesc = entry.description;
           time-start={formatDate(dateStart)}
           time-end={formatDate(dateEnd)}
           session-details={encodeURIComponent(
-            `Speaker: ${entry.speakers
-              .map((ele) => ele.fullName)
-              .join(", ")} \nTopics: ${entry.topics.join(" ")}`
+            `Speaker: ${entry.speakers?.map((ele) => ele.fullName).join(", ")} \nTopics: ${entry.topics.join(" ")}`
           )}
           session-title={entry.title}
           session-location={entry.room}
@@ -107,7 +104,7 @@ const pageDesc = entry.description;
   <div class="mt-10">
     <p class="text-3xl mb-6">Speakers</p>
     {
-      entry.speakers.map((speaker) => (
+      entry.speakers?.map((speaker) => (
         <a
           href={`/speakers/${speaker.slug}`}
           class="flex md:flex-row flex-col items-center mb-6"

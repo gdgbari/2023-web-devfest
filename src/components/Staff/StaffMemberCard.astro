@@ -1,7 +1,7 @@
 ---
-import { CollectionEntry } from "astro:content";
+import { type CollectionEntry } from "astro:content";
 import SpeakersLinks from "../Speakers/SpeakersLinks.astro";
-import { Speaker, SpeakerLinks } from "../../scripts/api/sessionize_api";
+import { type SpeakerLinks } from "../../scripts/api/sessionize_api";
 
 interface Props {
   value: CollectionEntry<"staff">;
