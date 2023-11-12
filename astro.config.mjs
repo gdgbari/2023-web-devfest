@@ -3,6 +3,7 @@ import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
 import AstroPWA from "@vite-pwa/astro";
 import { defineConfig } from "astro/config";
+import react from "@astrojs/react";
 
 import robotsTxt from "astro-robots-txt";
 import { WebsiteConfig } from "./src/config";
@@ -15,6 +16,7 @@ export default defineConfig({
     sitemap(),
     tailwind(),
     robotsTxt(),
+    react(),
     AstroPWA({
       workbox: { navigateFallback: "/404" },
       mode: 'production',
