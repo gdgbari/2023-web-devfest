@@ -6,3 +6,4 @@ firebase.json
 .firebase/hosting.ZGlzdA.cache
 copy/template.txt
 external/generate_copy.ts
+dev-dist/**

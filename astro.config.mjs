@@ -19,7 +19,7 @@ export default defineConfig({
     react(),
     AstroPWA({
       workbox: { navigateFallback: "/404" },
-      mode: 'production',
+      mode: import.meta.env.DEV?'development':'production',
       base: '/',
       scope: '/',
       includeAssets: ['favicon.svg'],
