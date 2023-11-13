@@ -39,4 +39,15 @@ export class WebsiteConfig {
     public static readonly TELEGRAM_SPEAKERS_GROUP : string = 'https://t.me/+FFIAMECGZGVjNmU0';
     public static readonly WEBSITE : string = 'https://gdg.community.dev/gdg-bari/';
 
+    /*--------------------------------------------
+    |              NUMBERS INFO                  |  
+    --------------------------------------------*/
+
+    public static readonly NUM_PARTECIPENTS : number = 500;
+    public static readonly NUM_SPEAKERS : number = 25;
+    public static readonly NUM_TALK_CATEGORIES : number = 10;
+    public static readonly NUM_TRACKS : number = 4;
+
+
+
 }

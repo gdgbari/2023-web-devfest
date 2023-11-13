@@ -1,24 +1,15 @@
 ---
 import { getSpeakers } from "../../scripts/api/sessionize_api";
-import SpeakerPreviewElement from "./SpeakerPreviewElement.astro";
+import { RandomSpeakerList } from "./RandomSpeakerList";
 
-let speakers = await getSpeakers();
+const speakers = await getSpeakers();
 
-if (speakers.length > 4) {
-  speakers = speakers.sort(() => Math.random() - 0.5).slice(0, 4);
-}
 ---
 
-<div class="py-6 max-w-6xl lg:w-4/5 w-full m-auto px-4">
+<div class="py-6 max-w-6xl lg:w-4/5 w-full m-auto px-4" >
   <h2 class="text-6xl mb-10 font-bold">Speakers</h2>
   <div class="grid md:grid-cols-4 sm:grid-cols-2 grid-flow-row gap-4 mt-5 mb-7">
-    {
-      speakers.map((s) => (
-        <div class="mx-auto">
-          <SpeakerPreviewElement speaker={s} />
-        </div>
-      ))
-    }
+    <RandomSpeakerList client:only="react" speakers={speakers??[]} />
   </div>
 
   <a
