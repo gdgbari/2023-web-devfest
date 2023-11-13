@@ -11,9 +11,10 @@ interface Props {
   pageUiTitle?: string;
   pageDescription?: string;
   navbarTrasparent?: boolean;
+  subtitle?: string;
 }
 
-const { pageTitle, pageUiTitle, pageDescription, navbarTrasparent } =
+const { pageTitle, pageUiTitle, pageDescription, navbarTrasparent, subtitle } =
   Astro.props;
 ---
 
@@ -30,7 +31,7 @@ const { pageTitle, pageUiTitle, pageDescription, navbarTrasparent } =
       class="main-content transition-fade flex flex-col items-stretch max-w-6xl lg:w-4/5 w-full m-auto px-4 pb-12 flex-1"
       data-swup="0"
     >
-      <PageTitle title={pageUiTitle ?? pageTitle} />
+      <PageTitle title={pageUiTitle ?? pageTitle} subtitle={subtitle} />
 
       <slot />
     </main>

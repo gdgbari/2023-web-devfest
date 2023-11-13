@@ -17,7 +17,7 @@ export default defineConfig({
     robotsTxt(),
     AstroPWA({
       workbox: { navigateFallback: "/404" },
-      mode: 'production',
+      mode: 'development',
       base: '/',
       scope: '/',
       includeAssets: ['favicon.svg'],
