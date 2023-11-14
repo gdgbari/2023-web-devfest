@@ -1,0 +1,24 @@
+<section>
+    <div class="text-right">
+        <button id="copyButton" class="mb-2 px-2 py-1 text-black rounded border-black border-2 focus:outline-none focus:ring">Copy</button>
+    </div>
+    <div id="container" class="pb-2 ps-4 sm:ps-6 border-s-4 dark:border-gray-400">
+        <p>I am really happy to announce that I am a speaker #DevFestBari23 from @gdgbari presenting my talk: <span class="italic font-bold">TALK TITLE</span></p>
+        <p>I will wait for you on 2 December 2023 for an amazing day 🚀💥</p>
+        <p>Reserve your free seat 👉🏽 bari.devfest.it</p>
+    </div>
+</section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        let copyBtn = document.querySelector("#copyButton")
+        document.querySelector("#copyButton").addEventListener("click", function() {
+            const textToCopy = document.querySelector("#container").innerText;
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                copyBtn.innerText = "Copied!"
+            }, (err) => {
+                console.error('Could not copy text: ', err);
+            });
+        });
+    });
+</script>

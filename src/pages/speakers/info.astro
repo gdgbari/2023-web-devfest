@@ -1,0 +1,34 @@
+---
+// Welcome to Astro! Everything between these triple-dash code fences
+
+import AnchorLink from "../../components/Common/AnchorLink.astro";
+import BaseLayout from "../../components/Common/BaseLayout.astro";
+import ClipboardCopyer from "../../components/Common/ClipboardCopyer.astro";
+import { WebsiteConfig } from "../../config";
+
+---
+
+<BaseLayout pageTitle="Speakers Info" subtitle="We're very pleased to have you at DevFest Bari 2023! Here's some information you'll need to know:">
+  <div class="grid grid-flow-row gap-4 mt-5 mb-7">
+    <div class="pb-4">
+      <h2 class="text-2xl pb-2 sm:truncate sm:text-3xl sm:tracking-tight">Speakers'dinner 🍽️</h2>
+      <p>We are hosting an Opening Dinner on <span class="font-semibold">Friday, December 1st 2023, from 21:00</span>.
+      <p>We'll let you know additional details about the dinner venue soon.</p>
+      <p>Meanwhile, please RSVP in our <AnchorLink href="https://forms.gle/c3JmBYMc5qDuA5fG8" placeholder="Google Form" />.
+      </p>
+    </div>
+    <div class="pb-4">
+      <h2 class="text-2xl pb-2 sm:truncate sm:text-3xl sm:tracking-tight">Communication 💬</h2>
+      <p>Join our <AnchorLink href={WebsiteConfig.TELEGRAM_SPEAKERS_GROUP} placeholder="Speakers Telegram group" />!</p>
+    </div>
+    <div class="pb-4">
+      <h2 class="text-2xl pb-2 sm:truncate sm:text-3xl sm:tracking-tight">Socials #️⃣</h2>
+      <p>Announce to the world you're a Speaker of DevFest Bari 2023!</p>
+      <p>We're publishing daily posts featuring speakers on our <AnchorLink href={WebsiteConfig.FACEBOOK_PAGE} placeholder="Facebook" /> and <AnchorLink href={WebsiteConfig.INSTAGRAM_PAGE} placeholder="Instagram" /> pages, please share them with your followers with the hashtag <span class="font-semibold">#DevFestBari23</span>!</p>
+      <p class="py-4">There is also this <AnchorLink href="https://www.canva.com/design/DAFzafkLNi0/eD9xaI_wsvm9XZlZgAbA2Q/edit" placeholder="Canva template" /> that you can share.
+      <p class="pt-4">You can use this copy:</p>
+      <ClipboardCopyer />
+      <p class="py-6">We can't wait to see you in a few weeks!</p>
+    </div>
+  </div>
+</BaseLayout>

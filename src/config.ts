@@ -36,6 +36,7 @@ export class WebsiteConfig {
     public static readonly MEETUP_PAGE : string = '';
     public static readonly INSTAGRAM_PAGE : string = 'https://www.instagram.com/gdgbari/';
     public static readonly LINKEDIN_PAGE : string = 'https://www.linkedin.com/company/gdgbari/';
+    public static readonly TELEGRAM_SPEAKERS_GROUP : string = 'https://t.me/+FFIAMECGZGVjNmU0';
     public static readonly WEBSITE : string = 'https://gdg.community.dev/gdg-bari/';
 
     /*--------------------------------------------
