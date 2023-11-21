@@ -14,6 +14,8 @@ const end = new Date(value.session.endsAt);
 const hasSpeakers = value.session.info && value.session.info.speakers;
 
 const url = !value.session.isServiceSession ? `/sessions/${value.session.info?.slug}`: null
+const userUnkownIcon = '/assets/vectors/user_circle.svg';
+
 ---
 
 <a href={url} class="p-4 border border-gray-400 rounded-md h-52 flex flex-col">
@@ -27,7 +29,7 @@ const url = !value.session.isServiceSession ? `/sessions/${value.session.info?.s
               <div class="flex-none w-10 pr-3">
                 <img
                   class="rounded-full"
-                  src={speaker.profilePicture}
+                  src={speaker.profilePicture ?? userUnkownIcon}
                   alt={speaker.fullName}
                 />
               </div>

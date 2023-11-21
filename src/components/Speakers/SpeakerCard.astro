@@ -14,6 +14,8 @@ let body = words.slice(0, 20).join(" ");
 if (words.length > 15) {
   body += "...";
 }
+
+const userUnkownIcon = '/assets/vectors/user_circle.svg';
 ---
 
 <a
@@ -21,7 +23,7 @@ if (words.length > 15) {
   class="bg-white p-3 h-full w-full shadow-md hover:shadow-lg flex flex-col items-center text-center duration-150 ease-in"
 >
   <img
-    src={speaker.profilePicture}
+    src={speaker.profilePicture ?? userUnkownIcon}
     alt={speaker.fullName}
     class="w-32 h-32 rounded-full"
   />
