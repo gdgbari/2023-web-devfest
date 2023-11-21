@@ -190,35 +190,63 @@ declare module 'astro:content' {
   slug: "ass_coach";
   body: string;
   collection: "externals";
-  data: InferEntrySchema<"externals">
-} & { render(): Render[".md"] };
-"aup copy.md": {
-	id: "aup copy.md";
-  slug: "aup-copy";
-  body: string;
-  collection: "externals";
-  data: InferEntrySchema<"externals">
+  data: any
 } & { render(): Render[".md"] };
 "aup.md": {
 	id: "aup.md";
   slug: "aup";
   body: string;
   collection: "externals";
-  data: InferEntrySchema<"externals">
+  data: any
 } & { render(): Render[".md"] };
 "codemotion.md": {
 	id: "codemotion.md";
   slug: "codemotion";
   body: string;
   collection: "externals";
-  data: InferEntrySchema<"externals">
+  data: any
+} & { render(): Render[".md"] };
+"e80.md": {
+	id: "e80.md";
+  slug: "e80";
+  body: string;
+  collection: "externals";
+  data: any
 } & { render(): Render[".md"] };
 "google.md": {
 	id: "google.md";
   slug: "google";
   body: string;
   collection: "externals";
-  data: InferEntrySchema<"externals">
+  data: any
+} & { render(): Render[".md"] };
+"jeba.md": {
+	id: "jeba.md";
+  slug: "jeba";
+  body: string;
+  collection: "externals";
+  data: any
+} & { render(): Render[".md"] };
+"link.md": {
+	id: "link.md";
+  slug: "link";
+  body: string;
+  collection: "externals";
+  data: any
+} & { render(): Render[".md"] };
+"nextome.md": {
+	id: "nextome.md";
+  slug: "nextome";
+  body: string;
+  collection: "externals";
+  data: any
+} & { render(): Render[".md"] };
+"wideverse.md": {
+	id: "wideverse.md";
+  slug: "wideverse";
+  body: string;
+  collection: "externals";
+  data: any
 } & { render(): Render[".md"] };
 };
 "sessions": {
@@ -227,21 +255,21 @@ declare module 'astro:content' {
   slug: "deep_dive_flutter";
   body: string;
   collection: "sessions";
-  data: InferEntrySchema<"sessions">
+  data: any
 } & { render(): Render[".md"] };
 "flutter_1.md": {
 	id: "flutter_1.md";
   slug: "flutter_1";
   body: string;
   collection: "sessions";
-  data: InferEntrySchema<"sessions">
+  data: any
 } & { render(): Render[".md"] };
 "flutter_2.md": {
 	id: "flutter_2.md";
   slug: "flutter_2";
   body: string;
   collection: "sessions";
-  data: InferEntrySchema<"sessions">
+  data: any
 } & { render(): Render[".md"] };
 };
 "speakers": {
@@ -250,7 +278,7 @@ declare module 'astro:content' {
   slug: "simone_bonfrate";
   body: string;
   collection: "speakers";
-  data: InferEntrySchema<"speakers">
+  data: any
 } & { render(): Render[".md"] };
 };
 "staff": {
@@ -259,42 +287,42 @@ declare module 'astro:content' {
   slug: "anna";
   body: string;
   collection: "staff";
-  data: InferEntrySchema<"staff">
+  data: any
 } & { render(): Render[".md"] };
 "laura.md": {
 	id: "laura.md";
   slug: "laura";
   body: string;
   collection: "staff";
-  data: InferEntrySchema<"staff">
+  data: any
 } & { render(): Render[".md"] };
 "michela.md": {
 	id: "michela.md";
   slug: "michela";
   body: string;
   collection: "staff";
-  data: InferEntrySchema<"staff">
+  data: any
 } & { render(): Render[".md"] };
 "mike.md": {
 	id: "mike.md";
   slug: "mike";
   body: string;
   collection: "staff";
-  data: InferEntrySchema<"staff">
+  data: any
 } & { render(): Render[".md"] };
 "paolo.md": {
 	id: "paolo.md";
   slug: "paolo";
   body: string;
   collection: "staff";
-  data: InferEntrySchema<"staff">
+  data: any
 } & { render(): Render[".md"] };
 "simone.md": {
 	id: "simone.md";
   slug: "simone";
   body: string;
   collection: "staff";
-  data: InferEntrySchema<"staff">
+  data: any
 } & { render(): Render[".md"] };
 };
 
@@ -306,5 +334,5 @@ declare module 'astro:content' {
 
 	type AnyEntryMap = ContentEntryMap & DataEntryMap;
 
-	type ContentConfig = typeof import("../src/content/config");
+	type ContentConfig = never;
 }

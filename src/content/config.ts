@@ -29,7 +29,7 @@ const externalsCollection = defineCollection({
     type: 'content', // v2.5.0 and later
     schema: z.object({
         name: z.string(),
-        type: z.enum(['sponsor_main', 'sponsor_platinum', 'sponsor_gold', 'sponsor_silver', 'partner',]),
+        type: z.enum(['sponsor_main', 'sponsor_platinum', 'sponsor_gold', 'sponsor_silver','sponsor_bronze', 'partner',]),
         url: z.string(),
         image: z.string(),
     }),
