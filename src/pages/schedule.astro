@@ -1,15 +1,16 @@
 ---
-import BaseLayout from "../components/Common/BaseLayout.astro";
+import LargeBaseLayout from "../components/Common/LargeBaseLayout.astro";
 import ScheduleCard from "../components/Schedule/ScheduleCard.astro";
 import { getSchedule } from "../scripts/api/sessionize_api";
 
 const schedule = await getSchedule();
 ---
 
-<BaseLayout pageTitle="Schedule">
+<LargeBaseLayout pageTitle="Schedule">
   {
     schedule.map((s) => {
-      const totalRooms = s.rooms.length;
+      const totalScheduleCols = s.rooms.length + 1;
+      const totalScheduleRows = s.timeSlots.length;
 
       return (
         <div class="mb-5">
@@ -21,27 +22,56 @@ const schedule = await getSchedule();
             })}
           </p>
           <div
-            class={`grid grid-flow-row lg:grid-cols-${totalRooms} grid-cols-1 gap-4`}
+            class={`grid grid-flow-row xl:grid-cols-[90px_repeat(5,_minmax(0,_1fr))] xl:grid-rows-${totalScheduleRows} grid-cols-1 gap-4`}
           >
-            {s.timeSlots.map((ts) =>
-              ts.rooms.map((tsr) => {
-                const useFullRow =
-                  tsr.session.isServiceSession || ts.rooms.length == 1;
+            {s.timeSlots.map((ts,i) => {
+              const hasServiseSession = ts.rooms.some(
+                (tsr) => tsr.session.isServiceSession,
+              );
+              const sessionsInTimeSlot = ts.rooms.map((tsr) => {
+                const startDate = new Date(tsr.session.startsAt);
+                const endDate = new Date(tsr.session.endsAt);
 
-                const colspanClass = `lg:col-span-${
-                  useFullRow ? totalRooms : 1
-                }`;
+                const slots =
+                  endDate.getTime() - startDate.getTime() > 50 * 60 * 1000 &&
+                  !hasServiseSession
+                    ? 2
+                    : 1;
+
+                const colspanClass = `xl:col-span-${
+                  hasServiseSession ? totalScheduleCols - 1 : 1
+                } row-span-${slots}`;
 
                 return (
                   <div class={colspanClass}>
                     <ScheduleCard value={tsr} />
                   </div>
                 );
-              })
-            )}
+              });
+
+              sessionsInTimeSlot.unshift(
+                <div class="font-medium text-2xl">
+                  <p>{ts.slotStart.substring(0, 5)}</p>
+                </div>,
+              );
+
+              const deltaNumRowsWithtalk = i== 0? false : s.timeSlots[i-1].rooms.length - ts.rooms.length;
+              console.log(deltaNumRowsWithtalk)
+
+              if (
+              deltaNumRowsWithtalk != 1 && 
+                ts.rooms.length + 1 < totalScheduleCols &&
+                !hasServiseSession
+              ) {
+                const placeholder = <div />;
+                sessionsInTimeSlot.push(placeholder);
+              }
+
+              return sessionsInTimeSlot;
+            })}
           </div>
         </div>
       );
     })
   }
-</BaseLayout>
+</LargeBaseLayout>

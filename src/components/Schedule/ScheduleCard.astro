@@ -1,6 +1,5 @@
 ---
 import { type ScheduleSlotRoom } from "../../scripts/api/sessionize_api";
-import { formatTime } from "../../scripts/time_utils";
 
 interface Props {
   value: ScheduleSlotRoom;
@@ -8,20 +7,24 @@ interface Props {
 
 const { value } = Astro.props;
 
-const start = new Date(value.session.startsAt);
-const end = new Date(value.session.endsAt);
-
 const hasSpeakers = value.session.info && value.session.info.speakers;
 
-const url = !value.session.isServiceSession ? `/sessions/${value.session.info?.slug}`: null
-const userUnkownIcon = '/assets/vectors/user_circle.svg';
-
+const url = !value.session.isServiceSession
+  ? `/sessions/${value.session.info?.slug}`
+  : null;
+const userUnkownIcon = "/assets/vectors/user_circle.svg";
 ---
 
-<a href={url} class="p-4 border border-gray-400 rounded-md h-52 flex flex-col">
+<a
+  href={url}
+  class={`p-4 border border-gray-400 rounded-md ${
+    value.session.isServiceSession ? "h-52" : "xl:h-full h-52"
+  } flex flex-col`}
+>
+{!value.session.isServiceSession && <p class="mb-2">{value.name}</p>}
   <p class="text-xl font-medium">{value.session.title}</p>
   <div class="flex flex-row mt-auto justify-between align-center">
-    <div class="flex flex-col gap-2">
+    <div class="mt-4 flex flex-col gap-2">
       {
         hasSpeakers &&
           value.session.info?.speakers!.map((speaker) => (
@@ -40,9 +43,5 @@ const userUnkownIcon = '/assets/vectors/user_circle.svg';
           ))
       }
     </div>
-    <div class="flex flex-col gap-1 justify-center">
-      {!value.session.isServiceSession && <p>{value.name}</p>}
-      <p>{formatTime(start)} - {formatTime(end)}</p>
-    </div>
   </div>
-</div>
+</a>
