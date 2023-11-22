@@ -56,7 +56,6 @@ const schedule = await getSchedule();
               );
 
               const deltaNumRowsWithtalk = i== 0? false : s.timeSlots[i-1].rooms.length - ts.rooms.length;
-              console.log(deltaNumRowsWithtalk)
 
               if (
               deltaNumRowsWithtalk != 1 && 

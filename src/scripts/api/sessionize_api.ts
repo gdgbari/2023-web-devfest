@@ -81,6 +81,7 @@ export interface Speaker {
 
 const API_ID = "vfsf0scu"
 const API_ENDPOINT = `https://sessionize.com/api/v2/${API_ID}`;
+const defaultProfileImage = "/assets/vectors/user_circle.svg"
 
 async function SessionizeGET(method: string): Promise<any> {
     const url = `${API_ENDPOINT}/view/${method}`;
@@ -187,7 +188,7 @@ function parseSpeaker(speakerRaw: any, sessions: SessionInfo[] | null) {
         fullName: speakerRaw.fullName,
         bio: speakerRaw.bio,
         tagLine: speakerRaw.tagLine,
-        profilePicture: speakerRaw.profilePicture,
+        profilePicture: speakerRaw.profilePicture ?? defaultProfileImage,
         links: { websites: [] }
     };
 

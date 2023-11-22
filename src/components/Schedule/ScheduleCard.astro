@@ -12,7 +12,6 @@ const hasSpeakers = value.session.info && value.session.info.speakers;
 const url = !value.session.isServiceSession
   ? `/sessions/${value.session.info?.slug}`
   : null;
-const userUnkownIcon = "/assets/vectors/user_circle.svg";
 ---
 
 <a
@@ -32,7 +31,7 @@ const userUnkownIcon = "/assets/vectors/user_circle.svg";
               <div class="flex-none w-10 pr-3">
                 <img
                   class="rounded-full"
-                  src={speaker.profilePicture ?? userUnkownIcon}
+                  src={speaker.profilePicture}
                   alt={speaker.fullName}
                 />
               </div>
