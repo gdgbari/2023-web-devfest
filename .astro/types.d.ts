@@ -241,6 +241,13 @@ declare module 'astro:content' {
   collection: "externals";
   data: InferEntrySchema<"externals">
 } & { render(): Render[".md"] };
+"wib_puglia.md": {
+	id: "wib_puglia.md";
+  slug: "wib_puglia";
+  body: string;
+  collection: "externals";
+  data: InferEntrySchema<"externals">
+} & { render(): Render[".md"] };
 "wideverse.md": {
 	id: "wideverse.md";
   slug: "wideverse";
